@@ -2,15 +2,15 @@
 
 import rclpy
 import time
-import hello_helpers.hello_misc as hm
+import hello_helpers.hello_misc as hm 
 
-class MotionLoopNode(hm.HelloNode): 
-    """ 
-    MotionLoopNode: serves as a base node to help control the motion commands over time 
+class MotionLoopNode(hm.HelloNode):
+    """
+    MotionLoopNode: serves as a base node to help control the motion commands over time
     """
     def __init__(self):
         super().__init__()
-        self.rate = 0.5 
+        self.rate = 0.5
         self.total_time = 60
         self.state = 0  # 0 = Pose A, 1 = Pose B
         self.poses = [
@@ -31,7 +31,6 @@ class MotionLoopNode(hm.HelloNode):
         self.start_time = time.time()
         self.get_logger().info(f'Starting {self.rate}-second motion timer.')
         self.motion_timer = self.create_timer(self.rate, self.motion_loop)
-
     def motion_loop(self):
         elapsed = time.time() - self.start_time
         if elapsed > self.total_time:
@@ -50,7 +49,6 @@ class MotionLoopNode(hm.HelloNode):
 
         self.state = 1 - self.state
 
-
 def main(args=None):
     try:
         node = MotionLoopNode()
@@ -61,11 +59,9 @@ def main(args=None):
         node.destroy_node()
         rclpy.shutdown()
 
-
 if __name__ == '__main__':
     main()
-
-""" 
+"""
 # Example documentation from Hello RObot tutorial
 import hello_helpers.hello_misc as hm
 
@@ -81,5 +77,5 @@ class MyNode(hm.HelloNode):
         self.move_to_pose({'joint_wrist_yaw': -1.0, 'joint_wrist_pitch': -1.0}, blocking=True)
 
 node = MyNode()
-node.main() 
+node.main()
 """
