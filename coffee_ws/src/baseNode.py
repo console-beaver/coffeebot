@@ -1,46 +1,81 @@
-import hello_helpers.hello_misc as hm 
-import rclpy  
-from rclpy.node import Timer
-import hello_helpers.hello_misc as hm
+#!/usr/bin/env python3
+
+import rclpy
 import time
+import hello_helpers.hello_misc as hm 
 
-
-class BaseNode(hm.HelloNode):
+class MotionLoopNode(hm.HelloNode):
+    """
+    MotionLoopNode: serves as a base node to help control the motion commands over time
+    """
     def __init__(self):
-        hm.HelloNode.__init__(self) 
-        self.current_index = 0   
+        super().__init__()
+        self.rate = 0.5
+        self.total_time = 60
+        self.state = 0  # 0 = Pose A, 1 = Pose B
+        self.poses = [
+            {'joint_lift': 0.4, 'joint_wrist_yaw': -1.0, 'joint_wrist_pitch': -1.0},  # Pose A
+            {'joint_lift': 1.0, 'joint_wrist_yaw': 0.0, 'joint_wrist_pitch': 0.0},    # Home
+        ]
+        self.start_time = None
+        self.motion_timer = None
 
-        self.lift_positions = [0.0, 1.0] 
-        self.target = None 
-        self.moving = False 
-        self.timer = None
-        
+        # 🧠 Start the HelloNode system (including spin thread)
+        hm.HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
+
+    def main(self):
+        self.get_logger().info('✅ Node is ready. Switching to position mode...')
+        self.switch_to_position_mode()
+        time.sleep(0.5)
+
+        self.start_time = time.time()
+        self.get_logger().info(f'Starting {self.rate}-second motion timer.')
+        self.motion_timer = self.create_timer(self.rate, self.motion_loop)
+    def motion_loop(self):
+        elapsed = time.time() - self.start_time
+        if elapsed > self.total_time:
+            self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
+            self.motion_timer.cancel()
+            rclpy.shutdown()
+            return
+
+        pose = self.poses[self.state]
+        self.get_logger().info(f'🤖 Moving to pose: {pose}')
+        try:
+            self.move_to_pose(pose, blocking=True)
+        except Exception as e:
+            self.get_logger().error(f'❌ Motion failed: {e}')
+            rclpy.shutdown()
+
+        self.state = 1 - self.state
+
+def main(args=None):
+    try:
+        node = MotionLoopNode()
+        node.main()
+        node.new_thread.join()  # Required to block until node finishes
+    except KeyboardInterrupt:
+        node.get_logger().info('❗ Interrupt received. Shutting down.')
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+"""
+# Example documentation from Hello RObot tutorial
+import hello_helpers.hello_misc as hm
+
+class MyNode(hm.HelloNode):
+    def __init__(self):
+        hm.HelloNode.__init__(self)
+
     def main(self):
         hm.HelloNode.main(self, 'my_node', 'my_node', wait_for_first_pointcloud=False)
 
-        self.move_to_pose({'joint_lift': 0.6}, blocking=True)
+        # my_node's main logic goes here
+        self.move_to_pose({'joint_lift': 1.0}, blocking=True)
         self.move_to_pose({'joint_wrist_yaw': -1.0, 'joint_wrist_pitch': -1.0}, blocking=True)
-        
-        self.timer = self.create_timer(0.2, self.lift_loop)
 
-        rclpy.spin(self)  
-
-    def lift_loop(self):
-        self.robot.pull_status()
-        current_lift = self.robot.status['joint_states']['position']['joint_lift'] # check this
-
-        if not self.moving:
-            self.target = self.lift_positions[self.current_index]
-            self.get_logger().info(f"Moving lift to {self.target}")
-            self.robot.move_to({'joint_lift': self.target})
-            self.moving = True
-        else:
-            if abs(current_lift - self.target) < 0.01:
-                self.get_logger().info(f"Reached {self.target}")
-                self.current_index = 1 - self.current_index  # Toggle
-                self.moving = False
-
-if __name__ == '__main__':
-    rclpy.init()
-    node = BaseNode()
-    node.main()
+node = MyNode()
+node.main()
+"""
