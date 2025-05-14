@@ -2,14 +2,12 @@
 
 import rclpy
 import time
-import subprocess
 from hello_helpers.hello_misc import HelloNode
 from speech_recognition_msgs.msg import SpeechRecognitionCandidates
 
-
 class MotionLoopNode(HelloNode):
     """
-    MotionLoopNode: serves as a base node to help control the motion commands over time
+    MotionLoopNode: Beeps 3x, then moves robot's lift up/down until 1 minute is up or "coffee" is heard.
     """
     def __init__(self):
         super().__init__()
@@ -22,8 +20,8 @@ class MotionLoopNode(HelloNode):
         ]
         self.start_time = None
         self.motion_timer = None
+        self.interrupted = False
 
-        # Start ROS node with Hello Robot's main system
         HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
 
     def main(self):
@@ -31,19 +29,25 @@ class MotionLoopNode(HelloNode):
         self.switch_to_position_mode()
         time.sleep(0.5)
 
-        # 🎤 Subscribe to speech input (not used yet, just set up)
+        # Subscribe to voice commands
         self.create_subscription(SpeechRecognitionCandidates, '/speech_to_text', self.speech_callback, 1)
 
-        # 🔊 Speak once
-        self.get_logger().info('🔊 Saying: "May I take your order?"')
-        self.say("May I take your order?")
+        # Beep 3x
+        self.get_logger().info('🔊 Beeping: "May I take your order?"')
+        self.beep()
 
-        # ⏱️ Start motion loop
+        # Start motion timer
         self.start_time = time.time()
-        self.get_logger().info(f'⏱️ Starting {self.rate}-second motion timer.')
+        self.get_logger().info(f'⏱️ Starting {self.rate}-second motion loop.')
         self.motion_timer = self.create_timer(self.rate, self.motion_loop)
 
     def motion_loop(self):
+        if self.interrupted:
+            self.get_logger().warn('🛑 Motion interrupted by keyword "coffee".')
+            self.motion_timer.cancel()
+            rclpy.shutdown()
+            return
+
         elapsed = time.time() - self.start_time
         if elapsed > self.total_time:
             self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
@@ -62,15 +66,20 @@ class MotionLoopNode(HelloNode):
         self.state = 1 - self.state
 
     def speech_callback(self, msg):
-        transcript = ' '.join(msg.transcript)
-        self.get_logger().info(f'🎤 Heard (but not used yet): {transcript}')
+        transcript = ' '.join(msg.transcript).lower()
+        self.get_logger().info(f'🎤 Heard: {transcript}')
+        if 'coffee' in transcript:
+            self.get_logger().warn('☕ Detected keyword: "coffee".')
+            self.interrupted = True
 
-    def say(self, text):
+    def beep(self):
         try:
-            subprocess.run(['espeak', text], check=True)
+            for i in range(3):
+                self.robot.pimu.trigger_beep()
+                self.get_logger().info(f'✅ Beep {i+1} triggered.')
+                time.sleep(0.3)
         except Exception as e:
-            self.get_logger().error(f'❌ Failed to speak: {e}')
-
+            self.get_logger().error(f'❌ Failed to beep: {e}')
 
 def main(args=None):
     try:
@@ -81,7 +90,6 @@ def main(args=None):
         node.get_logger().info('❗ Interrupt received. Shutting down.')
         node.destroy_node()
         rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
