@@ -7,7 +7,7 @@ from speech_recognition_msgs.msg import SpeechRecognitionCandidates
 
 class MotionLoopNode(HelloNode):
     """
-    MotionLoopNode: Beeps 3x, then moves robot's lift up/down until 1 minute is up or "coffee" is heard.
+    MotionLoopNode: Beeps 3x, then moves lift up/down until 60s or "test" is heard.
     """
     def __init__(self):
         super().__init__()
@@ -29,11 +29,11 @@ class MotionLoopNode(HelloNode):
         self.switch_to_position_mode()
         time.sleep(0.5)
 
-        # Subscribe to voice commands
+        # Subscribe to speech input
         self.create_subscription(SpeechRecognitionCandidates, '/speech_to_text', self.speech_callback, 1)
 
         # Beep 3x
-        self.get_logger().info('🔊 Beeping: "May I take your order?"')
+        self.get_logger().info('🔊 Beeping: "Say test to stop"')
         self.beep()
 
         # Start motion timer
@@ -43,7 +43,7 @@ class MotionLoopNode(HelloNode):
 
     def motion_loop(self):
         if self.interrupted:
-            self.get_logger().warn('🛑 Motion interrupted by keyword "coffee".')
+            self.get_logger().warn('🛑 Motion interrupted by keyword "test".')
             self.motion_timer.cancel()
             rclpy.shutdown()
             return
@@ -68,8 +68,8 @@ class MotionLoopNode(HelloNode):
     def speech_callback(self, msg):
         transcript = ' '.join(msg.transcript).lower()
         self.get_logger().info(f'🎤 Heard: {transcript}')
-        if 'coffee' in transcript:
-            self.get_logger().warn('☕ Detected keyword: "coffee".')
+        if 'test' in transcript:
+            self.get_logger().warn('🗣️ Detected keyword: "test"')
             self.interrupted = True
 
     def beep(self):
