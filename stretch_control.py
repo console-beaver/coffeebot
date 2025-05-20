@@ -8,31 +8,32 @@ BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', '
 
 # arm q-vector: lift, telescoping arm, wrist pitch, roll, yaw, gripper
 def EE_joint_control(q, node):
-    node.get_logger().info(f'starting ee joint control')
+    if node is not None: node.get_logger().info(f'starting ee joint control')
     # import ipdb; ipdb.set_trace()
     print(q)
     print(len(q))
     assert len(q) == 6
-    node.get_logger().info(f'ee joint control: q has correct size, attempting move_to_pose')
+    if node is not None: node.get_logger().info(f'ee joint control: q has correct size, attempting move_to_pose')
 
-    node.move_to_pose({
-        'joint_lift': q[0],
-        'joint_arm': q[1],
-        'joint_wrist_pitch': q[2],
-        'join_wrist_roll': q[3],
-        'joint_wrist_yaw': q[4],
-        'joint_gripper_finger_left': q[5]  # TODO: is gripper control correct?
-    }, blocking=True)
-    node.get_logger().info(f'ee joint control finished blocking movement call')
+    if node is not None: 
+        node.move_to_pose({
+            'joint_lift': q[0],
+            'joint_arm': q[1],
+            'joint_wrist_pitch': q[2],
+            'join_wrist_roll': q[3],
+            'joint_wrist_yaw': q[4],
+            'joint_gripper_finger_left': q[5]  # TODO: is gripper control correct?
+        }, blocking=True)
+    if node is not None: node.get_logger().info(f'ee joint control finished blocking movement call')
 
 # takes X = (x, y, z), uses inverse kinematics to call joint control
 def EE_position_control(x, node, chain):
-    node.get_logger().info(f'starting ee position control, attempting to solve for q from x={x}')
+    if node is not None: node.get_logger().info(f'starting ee position control, attempting to solve for q from x={x}')
     q_soln = chain.inverse_kinematics(x)  # TODO: initial_q parameter? (see tutorial for this)
-    node.get_logger().info(f'solved for q, attempting to move to found q')
+    if node is not None: node.get_logger().info(f'solved for q, attempting to move to found q')
     # TODO: may need to remove/rearrange elements from q_soln to match expected input of EE_joint_control
     EE_joint_control(q_soln, node)
-    node.get_logger().info(f'finished ee position control')
+    if node is not None: node.get_logger().info(f'finished ee position control')
 
 # create a chain object used by IK (should only need to be called once
 def prep_chain(urdf_path):

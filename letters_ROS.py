@@ -86,10 +86,17 @@ if __name__ == '__main__':
             # TODO: verify that this is the correct urdf to use (Michelle?)
             urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
             chain = prep_chain(urdf_path)
+            print('finished creating chain')
 
             import ikpy.urdf.utils
+            print('finished import')
             tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
+            print('finished creating tree')
+            # import ipdb; ipdb.set_trace()
+            from IPython import display
+            display.display_png(tree)
             import ipdb; ipdb.set_trace()
+            assert False
 
             print('LETTERS: created chain')
             node.main(chain, LETTER_WAYPOINTS[letter])
