@@ -1,12 +1,19 @@
 # IK written using https://github.com/hello-robot/stretch_tutorials/blob/master/stretch_body/jupyter/inverse_kinematics.ipynb as reference
 
+import numpy as np
+
 BANNED_LINK_NAMES = ['link_right_wheel', 'link_left_wheel', 'caster_link', 'link_gripper_finger_left', 'link_gripper_fingertip_left', 'link_gripper_finger_right', 'link_gripper_fingertip_right', 'link_head', 'link_head_pan', 'link_head_tilt', 'link_aruco_right_base', 'link_aruco_left_base', 'link_aruco_shoulder', 'link_aruco_top_wrist', 'link_aruco_inner_wrist', 'camera_bottom_screw_frame', 'camera_link', 'camera_depth_frame', 'camera_depth_optical_frame', 'camera_infra1_frame', 'camera_infra1_optical_frame', 'camera_infra2_frame', 'camera_infra2_optical_frame', 'camera_color_frame', 'camera_color_optical_frame', 'camera_accel_frame', 'camera_accel_optical_frame', 'camera_gyro_frame', 'camera_gyro_optical_frame', 'laser', 'respeaker_base']
 
 BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', 'joint_gripper_finger_left', 'joint_gripper_fingertip_left', 'joint_gripper_finger_right', 'joint_gripper_fingertip_right', 'joint_head', 'joint_head_pan', 'joint_head_tilt', 'joint_aruco_right_base', 'joint_aruco_left_base', 'joint_aruco_shoulder', 'joint_aruco_top_wrist', 'joint_aruco_inner_wrist', 'camera_joint', 'camera_link_joint', 'camera_depth_joint', 'camera_depth_optical_joint', 'camera_infra1_joint', 'camera_infra1_optical_joint', 'camera_infra2_joint', 'camera_infra2_optical_joint', 'camera_color_joint', 'camera_color_optical_joint', 'camera_accel_joint', 'camera_accel_optical_joint', 'camera_gyro_joint', 'camera_gyro_optical_joint', 'joint_laser', 'joint_respeaker']
 
 # arm q-vector: lift, telescoping arm, wrist pitch, roll, yaw, gripper
 def EE_joint_control(q, node):
+    node.get_logger().info(f'starting ee joint control')
+    # import ipdb; ipdb.set_trace()
+    print(q)
+    print(len(q))
     assert len(q) == 6
+    node.get_logger().info(f'ee joint control: q has correct size, attempting move_to_pose')
 
     node.move_to_pose({
         'joint_lift': q[0],
@@ -16,12 +23,16 @@ def EE_joint_control(q, node):
         'joint_wrist_yaw': q[4],
         'joint_gripper_finger_left': q[5]  # TODO: is gripper control correct?
     }, blocking=True)
+    node.get_logger().info(f'ee joint control finished blocking movement call')
 
 # takes X = (x, y, z), uses inverse kinematics to call joint control
 def EE_position_control(x, node, chain):
+    node.get_logger().info(f'starting ee position control, attempting to solve for q from x={x}')
     q_soln = chain.inverse_kinematics(x)  # TODO: initial_q parameter? (see tutorial for this)
+    node.get_logger().info(f'solved for q, attempting to move to found q')
     # TODO: may need to remove/rearrange elements from q_soln to match expected input of EE_joint_control
     EE_joint_control(q_soln, node)
+    node.get_logger().info(f'finished ee position control')
 
 # create a chain object used by IK (should only need to be called once
 def prep_chain(urdf_path):
@@ -53,5 +64,6 @@ def prep_chain(urdf_path):
             joint.parent = 'link_base_translation'
 
     modified_urdf_path = '/tmp/modified_urdf.urdf'
+    modified_urdf.save(modified_urdf_path)
     chain = ikpy.chain.Chain.from_urdf_file(modified_urdf_path)
     return chain

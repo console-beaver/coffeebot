@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # USAGE: run
 # `ros2 launch stretch_core stretch_driver.launch.py mode:=position`
 # then, run this script while specifying a letter in {a, b, c}
@@ -9,43 +10,93 @@ LETTER_WAYPOINTS = {
         'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0))
 }
 
-BANNED_LINK_NAMES = ['link_right_wheel', 'link_left_wheel', 'caster_link', 'link_gripper_finger_left', 'link_gripper_fingertip_left', 'link_gripper_finger_right', 'link_gripper_fingertip_right', 'link_head', 'link_head_pan', 'link_head_tilt', 'link_aruco_right_base', 'link_aruco_left_base', 'link_aruco_shoulder', 'link_aruco_top_wrist', 'link_aruco_inner_wrist', 'camera_bottom_screw_frame', 'camera_link', 'camera_depth_frame', 'camera_depth_optical_frame', 'camera_infra1_frame', 'camera_infra1_optical_frame', 'camera_infra2_frame', 'camera_infra2_optical_frame', 'camera_color_frame', 'camera_color_optical_frame', 'camera_accel_frame', 'camera_accel_optical_frame', 'camera_gyro_frame', 'camera_gyro_optical_frame', 'laser', 'respeaker_base']
-BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', 'joint_gripper_finger_left', 'joint_gripper_fingertip_left', 'joint_gripper_finger_right', 'joint_gripper_fingertip_right', 'joint_head', 'joint_head_pan', 'joint_head_tilt', 'joint_aruco_right_base', 'joint_aruco_left_base', 'joint_aruco_shoulder', 'joint_aruco_top_wrist', 'joint_aruco_inner_wrist', 'camera_joint', 'camera_link_joint', 'camera_depth_joint', 'camera_depth_optical_joint', 'camera_infra1_joint', 'camera_infra1_optical_joint', 'camera_infra2_joint', 'camera_infra2_optical_joint', 'camera_color_joint', 'camera_color_optical_joint', 'camera_accel_joint', 'camera_accel_optical_joint', 'camera_gyro_joint', 'camera_gyro_optical_joint', 'joint_laser', 'joint_respeaker']
-
-# arm q-vector: lift, telescoping arm, wrist pitch, roll, yaw, gripper
-def EE_joint_control(q, node): 
-    assert len(q) == 6
-
-    node.move_to_pose({
-        'joint_lift': q[0],
-        'joint_arm': q[1],
-        'joint_wrist_pitch': q[2],
-        'join_wrist_roll': q[3],
-        'joint_wrist_yaw': q[4],
-        'joint_gripper_finger_left': q[5]  # TODO: is gripper control correct?
-    }, blocking=True)
-
-# takes X = (x, y, z), uses inverse kinematics to call joint control
-def EE_position_control(x, node, chain):
-    q_soln = chain.inverse_kinematics(x)  # TODO: initial_q parameter? (see tutorial for this)
-    # TODO: may need to remove/rearrange elements from q_soln to match expected input of EE_joint_control
-    EE_joint_control(q_soln, node)
-
+import rclpy
+import time
+import hello_helpers.hello_misc as hm 
 import sys
-import os 
+import os
+from stretch_control import *
+
+class LettersNode(hm.HelloNode):
+    """
+    MotionLoopNode: serves as a base node to help control the motion commands over time
+    """
+    def __init__(self):
+        super().__init__()
+        self.rate = 0.5
+        self.total_time = 60
+        self.start_time = None
+        self.motion_timer = None
+        self.waypoint_idx = None
+
+        # 🧠 Start the HelloNode system (including spin thread)
+        hm.HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
+
+    def main(self, chain, waypoints):
+        self.get_logger().info('✅ Node is ready. Switching to position mode...')
+        self.switch_to_position_mode()
+        time.sleep(0.5)
+
+        self.waypoints = waypoints
+        self.chain = chain
+        self.waypoint_idx = 0
+
+        self.start_time = time.time()
+        self.get_logger().info(f'Starting {self.rate}-second motion timer.')
+        self.motion_timer = self.create_timer(self.rate, self.motion_loop)
+    def motion_loop(self):
+        self.get_logger().info(f'logger test 1')
+        if self.waypoint_idx is None:
+            self.get_logger().info(f'waypoint info is not defined yet')
+            return
+        if self.waypoint_idx >= len(self.waypoints):
+            self.get_logger().info(f'finished going through all waypoints')
+            return
+
+        self.get_logger().info(f'logger test 2')
+        elapsed = time.time() - self.start_time
+        if elapsed > self.total_time:
+            self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
+            self.motion_timer.cancel()
+            rclpy.shutdown()
+            return
+
+        # pose = self.poses[self.state]
+        self.get_logger().info(f'🤖 Moving to pose')
+        s = 0.1  # scale factor for letter
+        simple_transform = lambda x : (s * x[0] + 0.5, s * x[1], s * x[2] + 1)  # draw letter 0.5 meters away from base, 1 meter above ground
+        point = simple_transform(self.waypoints[self.waypoint_idx])
+        try:
+            EE_position_control(point, self, self.chain)
+            # self.move_to_pose(pose, blocking=True)
+        except Exception as e:
+            self.get_logger().error(f'❌ Motion failed: {e}')
+            rclpy.shutdown()
+
+        self.waypoint_idx += 1
+
 if __name__ == '__main__':
     assert len(sys.argv) > 1, 'forgot letter argument'
     letter = sys.argv[1][0].lower()
+    print('LETTERS: starting now')
     if letter in LETTER_WAYPOINTS.keys():
-        import hello_helpers.hello_misc as hm
+        node = LettersNode()
+        print('finished creating node')
+        try:
+            # TODO: verify that this is the correct urdf to use (Michelle?)
+            urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
+            chain = prep_chain(urdf_path)
 
-        # TODO: verify that this is the correct urdf to use (Michelle?)
-        urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
-        chain = prep_chain(urdf_path)
-        node = hm.HelloNode.quick_create('letters_demo')
+            import ikpy.urdf.utils
+            tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
+            import ipdb; ipdb.set_trace()
 
-        for point in LETTER_WAYPOINTS[letter]:
-            # TODO: may need to add transformation to get waypoints into stretch base frame
-            EE_position_control(point, node)
+            print('LETTERS: created chain')
+            node.main(chain, LETTER_WAYPOINTS[letter])
+            node.new_thread.join()  # block until finish
+        except:
+            node.get_logger().info('interrupt received, shutting down')
+            node.destroy_node()
+            rclpy.shutdown()
     else:
         print('invalid letter argument')
