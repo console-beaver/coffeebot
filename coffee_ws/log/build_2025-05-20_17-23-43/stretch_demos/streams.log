@@ -1,0 +1,26 @@
+[1.550s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_demos': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_demos build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/install.log --single-version-externally-managed install_data
+[1.794s] running egg_info
+[1.796s] writing ../../../build/stretch_demos/stretch_demos.egg-info/PKG-INFO
+[1.796s] writing dependency_links to ../../../build/stretch_demos/stretch_demos.egg-info/dependency_links.txt
+[1.796s] writing entry points to ../../../build/stretch_demos/stretch_demos.egg-info/entry_points.txt
+[1.796s] writing requirements to ../../../build/stretch_demos/stretch_demos.egg-info/requires.txt
+[1.796s] writing top-level names to ../../../build/stretch_demos/stretch_demos.egg-info/top_level.txt
+[1.797s] reading manifest file '../../../build/stretch_demos/stretch_demos.egg-info/SOURCES.txt'
+[1.798s] adding license file 'LICENSE.md'
+[1.798s] writing manifest file '../../../build/stretch_demos/stretch_demos.egg-info/SOURCES.txt'
+[1.798s] running build
+[1.798s] running build_py
+[1.798s] running install
+[1.799s] running install_lib
+[1.800s] running install_data
+[1.800s] running install_egg_info
+[1.802s] removing '/home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/python3.10/site-packages/stretch_demos-0.0.0-py3.10.egg-info' (and everything under it)
+[1.802s] Copying ../../../build/stretch_demos/stretch_demos.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/python3.10/site-packages/stretch_demos-0.0.0-py3.10.egg-info
+[1.802s] running install_scripts
+[1.823s] Installing clean_surface script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/stretch_demos
+[1.823s] Installing grasp_object script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/stretch_demos
+[1.823s] Installing handover_object script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/stretch_demos
+[1.823s] Installing hello_world script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/stretch_demos
+[1.823s] Installing open_drawer script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/stretch_demos
+[1.824s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/install.log'
+[1.860s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_demos' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_demos/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_demos build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_demos/install.log --single-version-externally-managed install_data

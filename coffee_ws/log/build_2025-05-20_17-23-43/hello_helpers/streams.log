@@ -1,0 +1,22 @@
+[1.705s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/hello_helpers': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/hello_helpers build --build-base /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build install --record /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log --single-version-externally-managed install_data
+[1.985s] running egg_info
+[1.985s] writing ../../../build/hello_helpers/hello_helpers.egg-info/PKG-INFO
+[1.985s] writing dependency_links to ../../../build/hello_helpers/hello_helpers.egg-info/dependency_links.txt
+[1.985s] writing entry points to ../../../build/hello_helpers/hello_helpers.egg-info/entry_points.txt
+[1.985s] writing requirements to ../../../build/hello_helpers/hello_helpers.egg-info/requires.txt
+[1.985s] writing top-level names to ../../../build/hello_helpers/hello_helpers.egg-info/top_level.txt
+[1.986s] reading manifest file '../../../build/hello_helpers/hello_helpers.egg-info/SOURCES.txt'
+[1.986s] adding license file 'LICENSE.md'
+[1.987s] writing manifest file '../../../build/hello_helpers/hello_helpers.egg-info/SOURCES.txt'
+[1.987s] running build
+[1.987s] running build_py
+[1.987s] running install
+[1.987s] running install_lib
+[1.988s] running install_data
+[1.988s] running install_egg_info
+[1.990s] removing '/home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers-0.2.0-py3.10.egg-info' (and everything under it)
+[1.990s] Copying ../../../build/hello_helpers/hello_helpers.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers-0.2.0-py3.10.egg-info
+[1.990s] running install_scripts
+[2.004s] Installing configure_wrist script to /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/hello_helpers
+[2.005s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log'
+[2.022s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/hello_helpers' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/hello_helpers build --build-base /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build install --record /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log --single-version-externally-managed install_data

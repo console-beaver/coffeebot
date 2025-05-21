@@ -1,0 +1,85 @@
+[1.507s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_funmap': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_funmap build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log --single-version-externally-managed install_data
+[1.750s] running egg_info
+[1.750s] creating ../../../build/stretch_funmap/stretch_funmap.egg-info
+[1.751s] writing ../../../build/stretch_funmap/stretch_funmap.egg-info/PKG-INFO
+[1.751s] writing dependency_links to ../../../build/stretch_funmap/stretch_funmap.egg-info/dependency_links.txt
+[1.751s] writing entry points to ../../../build/stretch_funmap/stretch_funmap.egg-info/entry_points.txt
+[1.751s] writing requirements to ../../../build/stretch_funmap/stretch_funmap.egg-info/requires.txt
+[1.751s] writing top-level names to ../../../build/stretch_funmap/stretch_funmap.egg-info/top_level.txt
+[1.752s] writing manifest file '../../../build/stretch_funmap/stretch_funmap.egg-info/SOURCES.txt'
+[1.753s] reading manifest file '../../../build/stretch_funmap/stretch_funmap.egg-info/SOURCES.txt'
+[1.753s] adding license file 'LICENSE.md'
+[1.753s] writing manifest file '../../../build/stretch_funmap/stretch_funmap.egg-info/SOURCES.txt'
+[1.753s] running build
+[1.753s] running build_py
+[1.753s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build
+[1.753s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib
+[1.754s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/numba_manipulation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/mapping.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/numba_check_line_path.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/merge_maps.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/numba_sample_ridge.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.754s] copying stretch_funmap/segment_max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/manipulation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/funmap.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/navigate.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/ros_max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/navigation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/numba_create_plane_image.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/numba_compare_images.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] copying stretch_funmap/numba_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap
+[1.755s] running install
+[1.755s] running install_lib
+[1.755s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_manipulation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/mapping.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_check_line_path.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/merge_maps.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_sample_ridge.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/segment_max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/manipulation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/funmap.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.756s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/navigate.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/ros_max_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/navigation_planning.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_create_plane_image.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_compare_images.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build/lib/stretch_funmap/numba_height_image.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap
+[1.757s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_manipulation_planning.py to numba_manipulation_planning.cpython-310.pyc
+[1.758s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/mapping.py to mapping.cpython-310.pyc
+[1.760s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_check_line_path.py to numba_check_line_path.cpython-310.pyc
+[1.761s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/merge_maps.py to merge_maps.cpython-310.pyc
+[1.763s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_sample_ridge.py to numba_sample_ridge.cpython-310.pyc
+[1.764s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/__init__.py to __init__.cpython-310.pyc
+[1.764s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/segment_max_height_image.py to segment_max_height_image.cpython-310.pyc
+[1.768s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/max_height_image.py to max_height_image.cpython-310.pyc
+[1.770s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/manipulation_planning.py to manipulation_planning.cpython-310.pyc
+[1.775s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/funmap.py to funmap.cpython-310.pyc
+[1.781s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/navigate.py to navigate.cpython-310.pyc
+[1.781s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/ros_max_height_image.py to ros_max_height_image.cpython-310.pyc
+[1.783s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/navigation_planning.py to navigation_planning.cpython-310.pyc
+[1.786s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_create_plane_image.py to numba_create_plane_image.cpython-310.pyc
+[1.786s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_compare_images.py to numba_compare_images.cpython-310.pyc
+[1.787s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap/numba_height_image.py to numba_height_image.cpython-310.pyc
+[1.789s] running install_data
+[1.789s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/ament_index
+[1.789s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/ament_index/resource_index
+[1.789s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/ament_index/resource_index/packages
+[1.789s] copying resource/stretch_funmap -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/ament_index/resource_index/packages
+[1.789s] copying package.xml -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap
+[1.789s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap/launch
+[1.789s] copying launch/mapping.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap/launch
+[1.790s] copying launch/funmap.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap/launch
+[1.790s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap/rviz
+[1.790s] copying rviz/stretch_mapping.rviz -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/share/stretch_funmap/rviz
+[1.790s] running install_egg_info
+[1.791s] Copying ../../../build/stretch_funmap/stretch_funmap.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap-0.0.0-py3.10.egg-info
+[1.792s] running install_scripts
+[1.809s] Installing funmap script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/stretch_funmap
+[1.809s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log'
+[2.035s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_funmap' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_funmap build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log --single-version-externally-managed install_data

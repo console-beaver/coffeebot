@@ -1,0 +1,99 @@
+[1.685s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_deep_perception': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_deep_perception build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log --single-version-externally-managed install_data
+[1.940s] running egg_info
+[1.940s] creating ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info
+[1.940s] writing ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/PKG-INFO
+[1.940s] writing dependency_links to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/dependency_links.txt
+[1.940s] writing entry points to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/entry_points.txt
+[1.941s] writing requirements to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/requires.txt
+[1.941s] writing top-level names to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/top_level.txt
+[1.941s] writing manifest file '../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/SOURCES.txt'
+[1.942s] reading manifest file '../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/SOURCES.txt'
+[1.942s] adding license file 'LICENSE.md'
+[1.942s] writing manifest file '../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/SOURCES.txt'
+[1.942s] running build
+[1.943s] running build_py
+[1.943s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build
+[1.943s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib
+[1.943s] creating /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/object_detector.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/test_object_detection_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/deep_learning_model_options.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/deep_models_shared.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/detection_ros_markers.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/detect_body_landmarks.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/detection_2d_to_3d.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/head_estimator.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.943s] copying stretch_deep_perception/object_detect_pytorch.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/detect_nearest_mouth.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/body_landmark_detector.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/detect_faces.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/test_body_landmark_detection_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/numba_image_to_pointcloud.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/detection_node.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/detect_objects.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] copying stretch_deep_perception/test_head_estimation_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception
+[1.944s] running install
+[1.944s] running install_lib
+[1.944s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.944s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/object_detector.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.944s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/test_object_detection_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/deep_learning_model_options.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/deep_models_shared.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detection_ros_markers.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detect_body_landmarks.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detection_2d_to_3d.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/head_estimator.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/object_detect_pytorch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detect_nearest_mouth.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/body_landmark_detector.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detect_faces.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/test_body_landmark_detection_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/numba_image_to_pointcloud.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detection_node.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/detect_objects.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.945s] copying /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build/lib/stretch_deep_perception/test_head_estimation_with_images.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception
+[1.946s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/object_detector.py to object_detector.cpython-310.pyc
+[1.947s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/test_object_detection_with_images.py to test_object_detection_with_images.cpython-310.pyc
+[1.948s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/deep_learning_model_options.py to deep_learning_model_options.cpython-310.pyc
+[1.948s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/deep_models_shared.py to deep_models_shared.cpython-310.pyc
+[1.948s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detection_ros_markers.py to detection_ros_markers.cpython-310.pyc
+[1.950s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detect_body_landmarks.py to detect_body_landmarks.cpython-310.pyc
+[1.950s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detection_2d_to_3d.py to detection_2d_to_3d.cpython-310.pyc
+[1.952s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/head_estimator.py to head_estimator.cpython-310.pyc
+[1.954s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/object_detect_pytorch.py to object_detect_pytorch.cpython-310.pyc
+[1.955s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detect_nearest_mouth.py to detect_nearest_mouth.cpython-310.pyc
+[1.955s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/body_landmark_detector.py to body_landmark_detector.cpython-310.pyc
+[1.957s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/__init__.py to __init__.cpython-310.pyc
+[1.957s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detect_faces.py to detect_faces.cpython-310.pyc
+[1.957s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/test_body_landmark_detection_with_images.py to test_body_landmark_detection_with_images.cpython-310.pyc
+[1.957s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/numba_image_to_pointcloud.py to numba_image_to_pointcloud.cpython-310.pyc
+[1.958s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detection_node.py to detection_node.cpython-310.pyc
+[1.958s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/detect_objects.py to detect_objects.cpython-310.pyc
+[1.959s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception/test_head_estimation_with_images.py to test_head_estimation_with_images.cpython-310.pyc
+[1.959s] running install_data
+[1.959s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/ament_index
+[1.959s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/ament_index/resource_index
+[1.959s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/ament_index/resource_index/packages
+[1.959s] copying resource/stretch_deep_perception -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/ament_index/resource_index/packages
+[1.959s] copying package.xml -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception
+[1.959s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/launch
+[1.959s] copying launch/stretch_detect_body_landmarks.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/launch
+[1.959s] copying launch/stretch_detect_nearest_mouth.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/launch
+[1.959s] copying launch/stretch_detect_faces.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/launch
+[1.959s] copying launch/stretch_detect_objects.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/launch
+[1.959s] creating /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/rviz
+[1.959s] copying rviz/face_detection.rviz -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/rviz
+[1.959s] copying rviz/body_landmark_detection.rviz -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/rviz
+[1.959s] copying rviz/nearest_mouth_detection.rviz -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/rviz
+[1.959s] copying rviz/object_detection.rviz -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/share/stretch_deep_perception/rviz
+[1.959s] running install_egg_info
+[1.961s] Copying ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception-0.0.0-py3.10.egg-info
+[1.961s] running install_scripts
+[1.976s] Installing detect_body_landmarks script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.977s] Installing detect_faces script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.977s] Installing detect_nearest_mouth script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.977s] Installing detect_objects script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.977s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log'
+[2.041s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_deep_perception' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_deep_perception build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log --single-version-externally-managed install_data
