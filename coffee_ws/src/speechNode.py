@@ -2,84 +2,54 @@
 
 import rclpy
 import time
-from hello_helpers.hello_misc import HelloNode
-from speech_recognition_msgs.msg import SpeechRecognitionCandidates
+import hello_helpers.hello_misc as hm
+import sounddevice as sd
+import numpy as np
+import scipy.io.wavfile as wav
+import subprocess
 
-class MotionLoopNode(HelloNode):
+class MotionLoopNode(hm.HelloNode):
     """
-    MotionLoopNode: Beeps 3x, then moves lift up/down until 60s or "test" is heard.
+    MotionLoopNode: Records audio and plays it back via Stretch speaker.
     """
     def __init__(self):
         super().__init__()
-        self.rate = 0.5  # seconds
-        self.total_time = 60  # seconds
-        self.state = 0
-        self.poses = [
-            {'joint_lift': 0.4, 'joint_wrist_yaw': -1.0, 'joint_wrist_pitch': -1.0},
-            {'joint_lift': 1.0, 'joint_wrist_yaw': 0.0, 'joint_wrist_pitch': 0.0},
-        ]
-        self.start_time = None
-        self.motion_timer = None
-        self.interrupted = False
+        self.filename = '/tmp/recorded_audio.wav'
+        self.sample_rate = 16000  # Stretch audio default
+        self.duration = 5.0  # seconds to record
 
-        HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
+        hm.HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
 
     def main(self):
-        self.get_logger().info('✅ Node is ready. Switching to position mode...')
-        self.switch_to_position_mode()
-        time.sleep(0.5)
+        self.get_logger().info('✅ Node is ready.')
 
-        # Subscribe to speech input
-        self.create_subscription(SpeechRecognitionCandidates, '/speech_to_text', self.speech_callback, 1)
+        # === RECORD ===
+        self.get_logger().info(f'🎙️ Recording {self.duration} seconds of audio...')
+        self.record_audio()
+        self.get_logger().info('✅ Done recording.')
 
-        # Beep 3x
-        self.get_logger().info('🔊 Beeping: "Say test to stop"')
-        self.beep()
+        # === PLAY ===
+        self.get_logger().info('🔊 Playing back...')
+        self.play_audio()
+        self.get_logger().info('✅ Playback complete.')
 
-        # Start motion timer
-        self.start_time = time.time()
-        self.get_logger().info(f'⏱️ Starting {self.rate}-second motion loop.')
-        self.motion_timer = self.create_timer(self.rate, self.motion_loop)
+        # === Optional: shutdown after ===
+        rclpy.shutdown()
 
-    def motion_loop(self):
-        if self.interrupted:
-            self.get_logger().warn('🛑 Motion interrupted by keyword "test".')
-            self.motion_timer.cancel()
-            rclpy.shutdown()
-            return
-
-        elapsed = time.time() - self.start_time
-        if elapsed > self.total_time:
-            self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
-            self.motion_timer.cancel()
-            rclpy.shutdown()
-            return
-
-        pose = self.poses[self.state]
-        self.get_logger().info(f'🤖 Moving to pose: {pose}')
+    def record_audio(self):
         try:
-            self.move_to_pose(pose, blocking=True)
+            audio = sd.rec(int(self.sample_rate * self.duration), samplerate=self.sample_rate, channels=1, dtype='int16')
+            sd.wait()  # Wait until recording is finished
+            wav.write(self.filename, self.sample_rate, audio)
         except Exception as e:
-            self.get_logger().error(f'❌ Motion failed: {e}')
-            rclpy.shutdown()
+            self.get_logger().error(f'❌ Failed to record audio: {e}')
 
-        self.state = 1 - self.state
-
-    def speech_callback(self, msg):
-        transcript = ' '.join(msg.transcript).lower()
-        self.get_logger().info(f'🎤 Heard: {transcript}')
-        if 'test' in transcript:
-            self.get_logger().warn('🗣️ Detected keyword: "test"')
-            self.interrupted = True
-
-    def beep(self):
+    def play_audio(self):
         try:
-            for i in range(3):
-                self.robot.pimu.trigger_beep()
-                self.get_logger().info(f'✅ Beep {i+1} triggered.')
-                time.sleep(0.3)
+            # Stretch OS has `aplay` preinstalled and wired to its speaker system
+            subprocess.run(['aplay', self.filename])
         except Exception as e:
-            self.get_logger().error(f'❌ Failed to beep: {e}')
+            self.get_logger().error(f'❌ Failed to play audio: {e}')
 
 def main(args=None):
     try:
