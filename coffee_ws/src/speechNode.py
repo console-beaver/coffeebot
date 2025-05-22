@@ -40,15 +40,15 @@ class SpeakerTestNode(HelloNode):
         self.voice_command = transcript
 
     def check_voice_command(self):
-        if self.voice_command == '1':
+        if self.voice_command == 'one':
             self.get_logger().info('🔈 Playing sound for "1"')
             self.play_audio(CONFIRM_SOUND_1)
             rclpy.shutdown()
-        elif self.voice_command == '2':
+        elif self.voice_command == 'two':
             self.get_logger().info('🔈 Playing sound for "2"')
             self.play_audio('/home/hello/audio/option2.wav')
             rclpy.shutdown(CONFIRM_SOUND_2)
-        elif self.voice_command == '3':
+        elif self.voice_command == 'three':
             self.get_logger().info('🔈 Playing sound for "3"')
             self.play_audio('/home/hello/audio/option3.wav')
             rclpy.shutdown(CONFIRM_SOUND_3)
