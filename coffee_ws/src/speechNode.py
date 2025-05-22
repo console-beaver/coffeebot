@@ -46,12 +46,12 @@ class SpeakerTestNode(HelloNode):
             rclpy.shutdown()
         elif self.voice_command == 'two':
             self.get_logger().info('🔈 Playing sound for "2"')
-            self.play_audio('/home/hello/audio/option2.wav')
-            rclpy.shutdown(CONFIRM_SOUND_2)
+            self.play_audio(CONFIRM_SOUND_2)
+            rclpy.shutdown()
         elif self.voice_command == 'three':
             self.get_logger().info('🔈 Playing sound for "3"')
-            self.play_audio('/home/hello/audio/option3.wav')
-            rclpy.shutdown(CONFIRM_SOUND_3)
+            self.play_audio(CONFIRM_SOUND_3)
+            rclpy.shutdown()
 
     def play_audio(self, audio_path):
         try:
