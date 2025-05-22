@@ -7,7 +7,9 @@
 LETTER_WAYPOINTS = {
         'a': ((0,0,0), (0.5,1,0), (1,0,0), (1,0,1), (0.75,0.5,1), (0.75,0.5,0), (0.25,0.5,0)),
         'b': ((0,0,0), (0,1,0), (1,0.75,0), (0,0.5,0), (1,0.25,0), (0,0,0)),
-        'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0))
+        'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0)),
+        # 'coord_test': ((0,0,0), (1,0,0), (0,0,0), (0,1,0), (0,0,0), (0,0,1), (0,0,0))
+        'coord_test': ((0,0,0), (1,0,0), (0,0,0), (0,1,0), (0,0,0), (0,0,1), (0,0,0))
 }
 
 import rclpy
@@ -45,7 +47,6 @@ class LettersNode(hm.HelloNode):
         self.get_logger().info(f'Starting {self.rate}-second motion timer.')
         self.motion_timer = self.create_timer(self.rate, self.motion_loop)
     def motion_loop(self):
-        self.get_logger().info(f'logger test 1')
         if self.waypoint_idx is None:
             self.get_logger().info(f'waypoint info is not defined yet')
             return
@@ -53,7 +54,6 @@ class LettersNode(hm.HelloNode):
             self.get_logger().info(f'finished going through all waypoints')
             return
 
-        self.get_logger().info(f'logger test 2')
         elapsed = time.time() - self.start_time
         if elapsed > self.total_time:
             self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
@@ -63,10 +63,13 @@ class LettersNode(hm.HelloNode):
 
         # pose = self.poses[self.state]
         self.get_logger().info(f'🤖 Moving to pose')
-        s = 0.1  # scale factor for letter
-        simple_transform = lambda x : (s * x[0] + 0.5, s * x[1], s * x[2] + 1)  # draw letter 0.5 meters away from base, 1 meter above ground
+        s = 0.4  # scale factor for letter
+        simple_transform = lambda x : (-s*x[0], -s*x[1], -s*x[2] + 0.7)
+        # simple_transform = lambda x : (s * x[0] + 0.5, s * x[1], s * x[2] + 1.5)  # draw letter 0.5 meters away from base, 1 meter above ground
+        # Y is pointing up, so swap Y and Z in the transform
         point = simple_transform(self.waypoints[self.waypoint_idx])
         try:
+            print(f'MOVING IDX={self.waypoint_idx}, WAYPOINT={point}')
             EE_position_control(point, self, self.chain)
             # self.move_to_pose(pose, blocking=True)
         except Exception as e:
@@ -77,7 +80,7 @@ class LettersNode(hm.HelloNode):
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1, 'forgot letter argument'
-    letter = sys.argv[1][0].lower()
+    letter = sys.argv[1].lower()
     print('LETTERS: starting now')
     if letter in LETTER_WAYPOINTS.keys():
         node = LettersNode()
@@ -87,16 +90,6 @@ if __name__ == '__main__':
             urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
             chain = prep_chain(urdf_path)
             print('finished creating chain')
-
-            import ikpy.urdf.utils
-            print('finished import')
-            tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
-            print('finished creating tree')
-            # import ipdb; ipdb.set_trace()
-            from IPython import display
-            display.display_png(tree)
-            import ipdb; ipdb.set_trace()
-            assert False
 
             print('LETTERS: created chain')
             node.main(chain, LETTER_WAYPOINTS[letter])

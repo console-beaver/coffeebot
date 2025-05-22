@@ -22,13 +22,13 @@ if __name__ == '__main__':
         urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
         chain = prep_chain(urdf_path)
 
-        import ikpy.urdf.utils
-        tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
-        print(type(tree))
+        # import ikpy.urdf.utils
+        # tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
+        # print(type(tree))
         from IPython import display
         # display.display_png(tree)
-        tree.format = 'png'
-        tree.render('mytree.png', view=True)
+        # tree.format = 'png'
+        # tree.render('mytree', view=True)
 
         for point in LETTER_WAYPOINTS[letter]:
             # TODO: may need to add transformation to get waypoints into stretch base frame
