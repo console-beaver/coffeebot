@@ -21,7 +21,7 @@ class SpeakerTestNode(hm.HelloNode):
     def play_audio(self):
         try:
             # Replace with your own WAV file path
-            audio_path = '/tmp/speaker_test.wav'
+            audio_path = '/speaker_test.wav'
             subprocess.run(['aplay', audio_path])
         except Exception as e:
             self.get_logger().error(f'❌ Failed to play audio: {e}')
