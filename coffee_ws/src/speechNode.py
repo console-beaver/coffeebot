@@ -40,7 +40,7 @@ class SpeakerTestNode(HelloNode):
         self.voice_command = transcript
 
     def check_voice_command(self):
-        if self.voice_command == 'one':
+        if self.voice_command == 'one' or 'one' in self.voice_command:
             self.get_logger().info('🔈 Playing sound for "1"')
             self.play_audio(CONFIRM_SOUND_1)
             rclpy.shutdown()
