@@ -39,19 +39,20 @@ class SpeakerTestNode(HelloNode):
         self.get_logger().info(f'🎤 Heard: "{transcript}"')
         self.voice_command = transcript
 
-    def check_voice_command(self):
-        if self.voice_command == 'one' or 'one' in self.voice_command:
-            self.get_logger().info('🔈 Playing sound for "1"')
-            self.play_audio(CONFIRM_SOUND_1)
-            rclpy.shutdown()
-        elif self.voice_command == 'two' or 'two' in self.voice_command:
-            self.get_logger().info('🔈 Playing sound for "2"')
-            self.play_audio(CONFIRM_SOUND_2)
-            rclpy.shutdown()
-        elif self.voice_command == 'three' or 'three' in self.voice_command:
-            self.get_logger().info('🔈 Playing sound for "3"')
-            self.play_audio(CONFIRM_SOUND_3)
-            rclpy.shutdown()
+    def check_voice_command(self): 
+        if self.voice_command:
+            if self.voice_command == 'one' or 'one' in self.voice_command:
+                self.get_logger().info('🔈 Playing sound for "1"')
+                self.play_audio(CONFIRM_SOUND_1)
+                rclpy.shutdown()
+            elif self.voice_command == 'two' or 'two' in self.voice_command:
+                self.get_logger().info('🔈 Playing sound for "2"')
+                self.play_audio(CONFIRM_SOUND_2)
+                rclpy.shutdown()
+            elif self.voice_command == 'three' or 'three' in self.voice_command:
+                self.get_logger().info('🔈 Playing sound for "3"')
+                self.play_audio(CONFIRM_SOUND_3)
+                rclpy.shutdown()
 
     def play_audio(self, audio_path):
         try:
