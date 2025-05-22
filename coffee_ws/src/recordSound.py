@@ -2,7 +2,7 @@ import sounddevice as sd
 import scipy.io.wavfile as wav
 import subprocess
 
-filename = 'recorded.wav'
+filename = 'sounds/recorded.wav'
 duration = 5  # seconds
 sample_rate = 16000  # Hz
 
