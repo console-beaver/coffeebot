@@ -1,0 +1,22 @@
+[1.548s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_funmap': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_funmap build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log --single-version-externally-managed install_data
+[1.841s] running egg_info
+[1.842s] writing ../../../build/stretch_funmap/stretch_funmap.egg-info/PKG-INFO
+[1.842s] writing dependency_links to ../../../build/stretch_funmap/stretch_funmap.egg-info/dependency_links.txt
+[1.842s] writing entry points to ../../../build/stretch_funmap/stretch_funmap.egg-info/entry_points.txt
+[1.842s] writing requirements to ../../../build/stretch_funmap/stretch_funmap.egg-info/requires.txt
+[1.842s] writing top-level names to ../../../build/stretch_funmap/stretch_funmap.egg-info/top_level.txt
+[1.845s] reading manifest file '../../../build/stretch_funmap/stretch_funmap.egg-info/SOURCES.txt'
+[1.845s] adding license file 'LICENSE.md'
+[1.846s] writing manifest file '../../../build/stretch_funmap/stretch_funmap.egg-info/SOURCES.txt'
+[1.846s] running build
+[1.846s] running build_py
+[1.847s] running install
+[1.847s] running install_lib
+[1.849s] running install_data
+[1.849s] running install_egg_info
+[1.852s] removing '/home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap-0.0.0-py3.10.egg-info' (and everything under it)
+[1.852s] Copying ../../../build/stretch_funmap/stretch_funmap.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages/stretch_funmap-0.0.0-py3.10.egg-info
+[1.852s] running install_scripts
+[1.872s] Installing funmap script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/stretch_funmap
+[1.872s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log'
+[1.891s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_funmap' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_funmap/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_funmap build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_funmap/install.log --single-version-externally-managed install_data

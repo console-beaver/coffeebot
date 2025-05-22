@@ -1,0 +1,17 @@
+LICENSE
+package.xml
+setup.cfg
+setup.py
+../../build/stretch_launch/stretch_launch.egg-info/PKG-INFO
+../../build/stretch_launch/stretch_launch.egg-info/SOURCES.txt
+../../build/stretch_launch/stretch_launch.egg-info/dependency_links.txt
+../../build/stretch_launch/stretch_launch.egg-info/entry_points.txt
+../../build/stretch_launch/stretch_launch.egg-info/requires.txt
+../../build/stretch_launch/stretch_launch.egg-info/top_level.txt
+../../build/stretch_launch/stretch_launch.egg-info/zip-safe
+launch/dual_stretch.launch.py
+resource/stretch_launch
+stretch_launch/__init__.py
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

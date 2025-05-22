@@ -1,0 +1,26 @@
+-- Install configuration: ""
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/meshes
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/meshes/.gitkeep
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/export_urdf_license_template.md
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/export_urdf.sh
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/stretch_base_imu.xacro
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/launch
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/launch/display.launch.py
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/rviz
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/rviz/stretch.rviz
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/package_run_dependencies/stretch_description
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/parent_prefix_path/stretch_description
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/ament_prefix_path.sh
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/path.sh
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/path.dsv
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.bash
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.sh
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.zsh
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.dsv
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/package.dsv
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/packages/stretch_description
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/cmake/stretch_descriptionConfig.cmake
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/cmake/stretch_descriptionConfig-version.cmake
+-- Up-to-date: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/package.xml

@@ -1,0 +1,25 @@
+[1.550s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_deep_perception': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_deep_perception build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log --single-version-externally-managed install_data
+[1.799s] running egg_info
+[1.799s] writing ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/PKG-INFO
+[1.799s] writing dependency_links to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/dependency_links.txt
+[1.800s] writing entry points to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/entry_points.txt
+[1.800s] writing requirements to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/requires.txt
+[1.800s] writing top-level names to ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/top_level.txt
+[1.801s] reading manifest file '../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/SOURCES.txt'
+[1.802s] adding license file 'LICENSE.md'
+[1.802s] writing manifest file '../../../build/stretch_deep_perception/stretch_deep_perception.egg-info/SOURCES.txt'
+[1.802s] running build
+[1.803s] running build_py
+[1.803s] running install
+[1.803s] running install_lib
+[1.805s] running install_data
+[1.805s] running install_egg_info
+[1.807s] removing '/home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception-0.0.0-py3.10.egg-info' (and everything under it)
+[1.807s] Copying ../../../build/stretch_deep_perception/stretch_deep_perception.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages/stretch_deep_perception-0.0.0-py3.10.egg-info
+[1.807s] running install_scripts
+[1.828s] Installing detect_body_landmarks script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.828s] Installing detect_faces script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.828s] Installing detect_nearest_mouth script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.828s] Installing detect_objects script to /home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/stretch_deep_perception
+[1.828s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log'
+[1.873s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_deep_perception' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_deep_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/stretch_deep_perception build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_deep_perception/install.log --single-version-externally-managed install_data

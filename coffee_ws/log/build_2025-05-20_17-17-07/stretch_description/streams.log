@@ -1,0 +1,34 @@
+[0.227s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/build/stretch_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch:/home/cs225a1/ament_ws/install/tf2_web_republisher_py:/home/cs225a1/ament_ws/install/stretch_ros_tutorials:/home/cs225a1/ament_ws/install/stretch_funmap:/home/cs225a1/ament_ws/install/stretch_calibration:/home/cs225a1/ament_ws/install/stretch_demos:/home/cs225a1/ament_ws/install/stretch_deep_perception:/home/cs225a1/ament_ws/install/stretch_core:/home/cs225a1/ament_ws/install/respeaker_ros2:/home/cs225a1/ament_ws/install/hello_helpers:/opt/ros/humble /usr/bin/cmake --build /home/cs225a1/coffeebot/coffee_ws/build/stretch_description -- -j16 -l16
+[1.023s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.023s] -- Configuring done
+[1.023s] -- Generating done
+[1.023s] -- Build files have been written to: /home/cs225a1/coffeebot/coffee_ws/build/stretch_description
+[1.026s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/build/stretch_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch:/home/cs225a1/ament_ws/install/tf2_web_republisher_py:/home/cs225a1/ament_ws/install/stretch_ros_tutorials:/home/cs225a1/ament_ws/install/stretch_funmap:/home/cs225a1/ament_ws/install/stretch_calibration:/home/cs225a1/ament_ws/install/stretch_demos:/home/cs225a1/ament_ws/install/stretch_deep_perception:/home/cs225a1/ament_ws/install/stretch_core:/home/cs225a1/ament_ws/install/respeaker_ros2:/home/cs225a1/ament_ws/install/hello_helpers:/opt/ros/humble /usr/bin/cmake --build /home/cs225a1/coffeebot/coffee_ws/build/stretch_description -- -j16 -l16
+[1.034s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/build/stretch_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch:/home/cs225a1/ament_ws/install/tf2_web_republisher_py:/home/cs225a1/ament_ws/install/stretch_ros_tutorials:/home/cs225a1/ament_ws/install/stretch_funmap:/home/cs225a1/ament_ws/install/stretch_calibration:/home/cs225a1/ament_ws/install/stretch_demos:/home/cs225a1/ament_ws/install/stretch_deep_perception:/home/cs225a1/ament_ws/install/stretch_core:/home/cs225a1/ament_ws/install/respeaker_ros2:/home/cs225a1/ament_ws/install/hello_helpers:/opt/ros/humble /usr/bin/cmake --install /home/cs225a1/coffeebot/coffee_ws/build/stretch_description
+[1.045s] -- Install configuration: ""
+[1.045s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/meshes
+[1.045s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/meshes/.gitkeep
+[1.045s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf
+[1.046s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/export_urdf_license_template.md
+[1.046s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/export_urdf.sh
+[1.046s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/urdf/stretch_base_imu.xacro
+[1.046s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/launch
+[1.047s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/launch/display.launch.py
+[1.047s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/rviz
+[1.047s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/rviz/stretch.rviz
+[1.047s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/package_run_dependencies/stretch_description
+[1.047s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/parent_prefix_path/stretch_description
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/ament_prefix_path.sh
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/ament_prefix_path.dsv
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/path.sh
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/environment/path.dsv
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.bash
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.sh
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.zsh
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/local_setup.dsv
+[1.048s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/package.dsv
+[1.049s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/ament_index/resource_index/packages/stretch_description
+[1.049s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/cmake/stretch_descriptionConfig.cmake
+[1.049s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/cmake/stretch_descriptionConfig-version.cmake
+[1.049s] -- Installing: /home/cs225a1/coffeebot/coffee_ws/install/stretch_description/share/stretch_description/package.xml
+[1.050s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/build/stretch_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch:/home/cs225a1/ament_ws/install/tf2_web_republisher_py:/home/cs225a1/ament_ws/install/stretch_ros_tutorials:/home/cs225a1/ament_ws/install/stretch_funmap:/home/cs225a1/ament_ws/install/stretch_calibration:/home/cs225a1/ament_ws/install/stretch_demos:/home/cs225a1/ament_ws/install/stretch_deep_perception:/home/cs225a1/ament_ws/install/stretch_core:/home/cs225a1/ament_ws/install/respeaker_ros2:/home/cs225a1/ament_ws/install/hello_helpers:/opt/ros/humble /usr/bin/cmake --install /home/cs225a1/coffeebot/coffee_ws/build/stretch_description

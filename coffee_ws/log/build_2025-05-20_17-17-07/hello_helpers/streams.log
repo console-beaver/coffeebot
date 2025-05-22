@@ -1,0 +1,56 @@
+[1.495s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/hello_helpers': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/hello_helpers build --build-base /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build install --record /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log --single-version-externally-managed install_data
+[1.737s] running egg_info
+[1.738s] creating ../../../build/hello_helpers/hello_helpers.egg-info
+[1.738s] writing ../../../build/hello_helpers/hello_helpers.egg-info/PKG-INFO
+[1.738s] writing dependency_links to ../../../build/hello_helpers/hello_helpers.egg-info/dependency_links.txt
+[1.738s] writing entry points to ../../../build/hello_helpers/hello_helpers.egg-info/entry_points.txt
+[1.738s] writing requirements to ../../../build/hello_helpers/hello_helpers.egg-info/requires.txt
+[1.739s] writing top-level names to ../../../build/hello_helpers/hello_helpers.egg-info/top_level.txt
+[1.739s] writing manifest file '../../../build/hello_helpers/hello_helpers.egg-info/SOURCES.txt'
+[1.740s] reading manifest file '../../../build/hello_helpers/hello_helpers.egg-info/SOURCES.txt'
+[1.740s] adding license file 'LICENSE.md'
+[1.741s] writing manifest file '../../../build/hello_helpers/hello_helpers.egg-info/SOURCES.txt'
+[1.741s] running build
+[1.741s] running build_py
+[1.741s] creating /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build
+[1.741s] creating /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib
+[1.741s] creating /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.741s] copying src/hello_helpers/hello_misc.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/joint_qpos_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/simple_command_group.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/gripper_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/gamepad_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/fit_plane.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] copying src/hello_helpers/hello_ros_viz.py -> /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers
+[1.742s] running install
+[1.742s] running install_lib
+[1.743s] creating /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/hello_misc.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/joint_qpos_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/simple_command_group.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/__init__.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/gripper_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.743s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/gamepad_conversion.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.744s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/fit_plane.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.744s] copying /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build/lib/hello_helpers/hello_ros_viz.py -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers
+[1.744s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/hello_misc.py to hello_misc.cpython-310.pyc
+[1.748s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/joint_qpos_conversion.py to joint_qpos_conversion.cpython-310.pyc
+[1.748s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/simple_command_group.py to simple_command_group.cpython-310.pyc
+[1.749s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/__init__.py to __init__.cpython-310.pyc
+[1.749s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/gripper_conversion.py to gripper_conversion.cpython-310.pyc
+[1.749s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/gamepad_conversion.py to gamepad_conversion.cpython-310.pyc
+[1.750s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/fit_plane.py to fit_plane.cpython-310.pyc
+[1.751s] byte-compiling /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers/hello_ros_viz.py to hello_ros_viz.cpython-310.pyc
+[1.752s] running install_data
+[1.752s] creating /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/share/ament_index
+[1.752s] creating /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/share/ament_index/resource_index
+[1.752s] creating /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/share/ament_index/resource_index/packages
+[1.752s] copying resource/hello_helpers -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/share/ament_index/resource_index/packages
+[1.753s] copying package.xml -> /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/share/hello_helpers
+[1.753s] running install_egg_info
+[1.754s] Copying ../../../build/hello_helpers/hello_helpers.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages/hello_helpers-0.2.0-py3.10.egg-info
+[1.754s] running install_scripts
+[1.772s] Installing configure_wrist script to /home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/hello_helpers
+[1.772s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log'
+[1.794s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/hello_helpers' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/hello_helpers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/hello_helpers build --build-base /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/build install --record /home/cs225a1/coffeebot/coffee_ws/build/hello_helpers/install.log --single-version-externally-managed install_data

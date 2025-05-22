@@ -1,0 +1,6 @@
+[31mCMake Error at cmake_install.cmake:46 (file):
+  file INSTALL cannot find
+  "/home/cs225a1/coffeebot/coffee_ws/src/stretch_ros2/stretch_description/meshes":
+  No such file or directory.
+
+[0m

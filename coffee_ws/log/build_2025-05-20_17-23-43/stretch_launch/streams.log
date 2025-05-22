@@ -1,0 +1,22 @@
+[1.545s] Invoking command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_launch': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/stretch_launch build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/install.log --single-version-externally-managed install_data
+[1.796s] running egg_info
+[1.797s] writing ../../build/stretch_launch/stretch_launch.egg-info/PKG-INFO
+[1.797s] writing dependency_links to ../../build/stretch_launch/stretch_launch.egg-info/dependency_links.txt
+[1.797s] writing entry points to ../../build/stretch_launch/stretch_launch.egg-info/entry_points.txt
+[1.798s] writing requirements to ../../build/stretch_launch/stretch_launch.egg-info/requires.txt
+[1.798s] writing top-level names to ../../build/stretch_launch/stretch_launch.egg-info/top_level.txt
+[1.799s] reading manifest file '../../build/stretch_launch/stretch_launch.egg-info/SOURCES.txt'
+[1.799s] adding license file 'LICENSE'
+[1.800s] writing manifest file '../../build/stretch_launch/stretch_launch.egg-info/SOURCES.txt'
+[1.800s] running build
+[1.800s] running build_py
+[1.800s] running install
+[1.800s] running install_lib
+[1.802s] running install_data
+[1.802s] copying launch/dual_stretch.launch.py -> /home/cs225a1/coffeebot/coffee_ws/install/stretch_launch/share/stretch_launch/launch
+[1.802s] running install_egg_info
+[1.804s] removing '/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch/lib/python3.10/site-packages/stretch_launch-0.0.0-py3.10.egg-info' (and everything under it)
+[1.804s] Copying ../../build/stretch_launch/stretch_launch.egg-info to /home/cs225a1/coffeebot/coffee_ws/install/stretch_launch/lib/python3.10/site-packages/stretch_launch-0.0.0-py3.10.egg-info
+[1.804s] running install_scripts
+[1.825s] writing list of installed files to '/home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/install.log'
+[1.867s] Invoked command in '/home/cs225a1/coffeebot/coffee_ws/src/stretch_launch' returned '0': PYTHONPATH=/home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/cs225a1/coffeebot/coffee_ws/install/stretch_launch/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/stretch_launch build --build-base /home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/build install --record /home/cs225a1/coffeebot/coffee_ws/build/stretch_launch/install.log --single-version-externally-managed install_data
