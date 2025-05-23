@@ -4,16 +4,17 @@
 # then, run this script while specifying a letter in {a, b, c}
 
 WAIT_TIME = 1
+INTERP_POINTS = 10
 
 # letters are defined relative to bottom-left corner, (x, y, z) (where z is out of the page)
 LETTER_WAYPOINTS = {
         'a': ((0,0,0), (0.5,1,0), (1,0,0), (1,0,1), (0.75,0.5,1), (0.75,0.5,0), (0.25,0.5,0)),
         'b': ((0,0,0), (0,1,0), (1,0.75,0), (0,0.5,0), (1,0.25,0), (0,0,0)),
         'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0)),
-        # 'coord_test': ((0,0,0), (1,0,0), (0,0,0), (0,1,0), (0,0,0), (0,0,1), (0,0,0))
         'coord_test': ((0,0,0), (1,0,0), (0,0,0), (0,1,0), (0,0,0), (0,0,1), (0,0,0)),
         'yaw_test_1': ((0,0,0), (0,1,0), (0,0.5,0), (0,0,0), (0,-0.5,0), (0,-1,0)),
-        'yaw_test_2': ((0,0,0), (0,0.1,0), (0,0.2,0), (0,0.3,0), (0,0.4,0), (0,0.5,0), (0,0.6,0), (0,0.7,0), (0,0.8,0), (0,0.9,0), (0,1,0))
+        'yaw_test_2': ((0,0,0), (0,0.1,0), (0,0.2,0), (0,0.3,0), (0,0.4,0), (0,0.5,0), (0,0.6,0), (0,0.7,0), (0,0.8,0), (0,0.9,0), (0,1,0)),
+        'interp_test': ((0,0,0), (0,1,0))
 }
 
 import rclpy
@@ -71,8 +72,14 @@ class LettersNode(hm.HelloNode):
         # Y is pointing up, so swap Y and Z in the transform
         point = simple_transform(self.waypoints[self.waypoint_idx])
         try:
-            print(f'MOVING IDX={self.waypoint_idx}, WAYPOINT={point}')
-            EE_position_control_2(point, self, WAIT_TIME)
+            if self.waypoint_idx > 0 and INTERP_POINTS > 0:
+                t_values = np.linspace(0, 1, INTERP_POINTS + 2)[1:-1]
+                prev_point = np.asarray(simple_transform(self.waypoints[self.waypoint_idx-1]), dtype=float)
+                next_point = np.asarray(point, dtype=float)
+                for t in t_values:
+                    interp_point = tuple(prev_point + t * (next_point - prev_point))
+                    EE_position_control_2(interp_point, self, blocking=False, sleep_time=0.15)
+            EE_position_control_2(point, self, sleep_time=5 if self.waypoint_idx == 0 else WAIT_TIME)
         except Exception as e:
             self.get_logger().error(f'❌ Motion failed: {e}')
             rclpy.shutdown()

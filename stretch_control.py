@@ -11,7 +11,7 @@ BANNED_LINK_NAMES = ['link_right_wheel', 'link_left_wheel', 'caster_link', 'link
 BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', 'joint_gripper_finger_left', 'joint_gripper_fingertip_left', 'joint_gripper_finger_right', 'joint_gripper_fingertip_right', 'joint_head', 'joint_head_pan', 'joint_head_tilt', 'joint_aruco_right_base', 'joint_aruco_left_base', 'joint_aruco_shoulder', 'joint_aruco_top_wrist', 'joint_aruco_inner_wrist', 'camera_joint', 'camera_link_joint', 'camera_depth_joint', 'camera_depth_optical_joint', 'camera_infra1_joint', 'camera_infra1_optical_joint', 'camera_infra2_joint', 'camera_infra2_optical_joint', 'camera_color_joint', 'camera_color_optical_joint', 'camera_accel_joint', 'camera_accel_optical_joint', 'camera_gyro_joint', 'camera_gyro_optical_joint', 'joint_laser', 'joint_respeaker', 'joint_base_imu', 'joint_puller']
 
 # implemented from scratch, using only 3 joints (arm lift, telescoping arm extension, and wrist yaw
-def EE_position_control_2(X, node, sleep_time):
+def EE_position_control_2(X, node, sleep_time=0, blocking=True):
     # my base-frame coordinates: arm is connected to base at (0,0,0), x,y,z
     # +x points in the direction of the telescoping arm
     # +z points upward, that means +y points in direction of base's front (INKY label)
@@ -34,12 +34,12 @@ def EE_position_control_2(X, node, sleep_time):
     # print(f'calculated theta for this movement: {theta}, {theta * sign(X[1])}')
     x_offset = EE_LENGTH * math.cos(theta)
 
-    node.move_to_pose({'joint_wrist_pitch': 0.0, 'joint_wrist_roll': 0.0})
+    node.move_to_pose({'joint_wrist_pitch': 0.0, 'joint_wrist_roll': 0.0, 'joint_gripper_finger_left': 0.0})
     node.move_to_pose({
         'joint_lift': X[2],
         'joint_arm': X[0] - x_offset,
-        'joint_wrist_yaw': theta * sign(X[1]),
-    }, blocking=True)
+        'joint_wrist_yaw': theta * sign(float(X[1])),
+    }, blocking=blocking)
 
     print(f'finished movement')
 
