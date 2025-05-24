@@ -44,7 +44,8 @@ class waiter_state():
     def __init__(self): 
         self.state = 'init'  
     
-    def compute_state(self, queue): 
+    def compute_state(self, queue):
+        print("computed state: ", self.state)
         if len(queue.labels) == 0:   
             self.state = 'collecting_order' 
         elif len(queue.labels) > 0: 

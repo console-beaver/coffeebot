@@ -13,7 +13,8 @@ RATE = 1.0
 class WaiterNode(hm.HelloNode):
     def __init__(self): 
         super().__init__()
-        self.state = waiter_state()
+        self.state = waiter_state() 
+        self.asked = False
         self.queue = orderQ() #TODO: both robots have to share the same queue object  
 
         hm.HelloNode.main(self, 'waiter_node', 'waiter_node', wait_for_first_pointcloud=False) 
@@ -23,23 +24,25 @@ class WaiterNode(hm.HelloNode):
         self.get_logger().info('✅ Waiter Node initialized.') 
         self.create_timer(RATE, self.state_machine_loop) 
 
-    def state_machine_loop(self):  
-        if self.state == 'init': 
+    def state_machine_loop(self): 
+        print(self.state.state)
+        if self.state.state == 'init': 
             self.state.compute_state(self.queue) 
-        elif self.state == 'collecting_order':  
-            self.asked = False  
+        elif self.state.state == 'collecting_order':  
+            #self.asked = False  
             self.take_order()
-        elif self.state == 'writing_label':
+        elif self.state.sate == 'writing_label':
             self.write_label
     
     def take_order(self):   
-        if self.asked:  
+        print('running take order')
+        if not self.asked:  
             self.respeaker.ask_for_order() 
             self.asked = True
         order_id = self.respeaker.check_for_order()
         if order_id:
             self.get_logger().info(f'📦 Order received: {order}')
-            self.state = 'done'   
+            #self.state = 'done'   
             order_obj = order(order_id)
             self.queue.add_order(order_obj)   
             self.get_logger().info('✅ Ording Task complete.') 
