@@ -3,11 +3,18 @@
 # `ros2 launch stretch_core stretch_driver.launch.py mode:=position`
 # then, run this script while specifying a letter in {a, b, c}
 
+WAIT_TIME = 1
+INTERP_POINTS = 10
+
 # letters are defined relative to bottom-left corner, (x, y, z) (where z is out of the page)
 LETTER_WAYPOINTS = {
         'a': ((0,0,0), (0.5,1,0), (1,0,0), (1,0,1), (0.75,0.5,1), (0.75,0.5,0), (0.25,0.5,0)),
         'b': ((0,0,0), (0,1,0), (1,0.75,0), (0,0.5,0), (1,0.25,0), (0,0,0)),
-        'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0))
+        'c': ((1,0,0), (0.5,0,0), (0,0.5,0), (0.5,1,0), (1,1,0)),
+        'coord_test': ((0,0,0), (1,0,0), (0,0,0), (0,1,0), (0,0,0), (0,0,1), (0,0,0)),
+        'yaw_test_1': ((0,0,0), (0,1,0), (0,0.5,0), (0,0,0), (0,-0.5,0), (0,-1,0)),
+        'yaw_test_2': ((0,0,0), (0,0.1,0), (0,0.2,0), (0,0.3,0), (0,0.4,0), (0,0.5,0), (0,0.6,0), (0,0.7,0), (0,0.8,0), (0,0.9,0), (0,1,0)),
+        'interp_test': ((0,0,0), (0,1,0))
 }
 
 import rclpy
@@ -32,20 +39,18 @@ class LettersNode(hm.HelloNode):
         # 🧠 Start the HelloNode system (including spin thread)
         hm.HelloNode.main(self, 'motion_loop_node', 'motion_loop_node', wait_for_first_pointcloud=False)
 
-    def main(self, chain, waypoints):
+    def main(self, waypoints):
         self.get_logger().info('✅ Node is ready. Switching to position mode...')
         self.switch_to_position_mode()
         time.sleep(0.5)
 
         self.waypoints = waypoints
-        self.chain = chain
         self.waypoint_idx = 0
 
         self.start_time = time.time()
         self.get_logger().info(f'Starting {self.rate}-second motion timer.')
         self.motion_timer = self.create_timer(self.rate, self.motion_loop)
     def motion_loop(self):
-        self.get_logger().info(f'logger test 1')
         if self.waypoint_idx is None:
             self.get_logger().info(f'waypoint info is not defined yet')
             return
@@ -53,7 +58,6 @@ class LettersNode(hm.HelloNode):
             self.get_logger().info(f'finished going through all waypoints')
             return
 
-        self.get_logger().info(f'logger test 2')
         elapsed = time.time() - self.start_time
         if elapsed > self.total_time:
             self.get_logger().info(f"✅ {self.total_time} sec complete. Shutting down.")
@@ -61,14 +65,21 @@ class LettersNode(hm.HelloNode):
             rclpy.shutdown()
             return
 
-        # pose = self.poses[self.state]
         self.get_logger().info(f'🤖 Moving to pose')
-        s = 0.1  # scale factor for letter
-        simple_transform = lambda x : (s * x[0] + 0.5, s * x[1], s * x[2] + 1)  # draw letter 0.5 meters away from base, 1 meter above ground
+        s = 0.2  # scale factor for letter
+        simple_transform = lambda x : (-s*x[0]+0.4, -s*x[1], s*x[2] + 0.7)
+        # simple_transform = lambda x : (s * x[0] + 0.5, s * x[1], s * x[2] + 1.5)  # draw letter 0.5 meters away from base, 1 meter above ground
+        # Y is pointing up, so swap Y and Z in the transform
         point = simple_transform(self.waypoints[self.waypoint_idx])
         try:
-            EE_position_control(point, self, self.chain)
-            # self.move_to_pose(pose, blocking=True)
+            if self.waypoint_idx > 0 and INTERP_POINTS > 0:
+                t_values = np.linspace(0, 1, INTERP_POINTS + 2)[1:-1]
+                prev_point = np.asarray(simple_transform(self.waypoints[self.waypoint_idx-1]), dtype=float)
+                next_point = np.asarray(point, dtype=float)
+                for t in t_values:
+                    interp_point = tuple(prev_point + t * (next_point - prev_point))
+                    EE_position_control_2(interp_point, self, blocking=False, sleep_time=0.15)
+            EE_position_control_2(point, self, sleep_time=5 if self.waypoint_idx == 0 else WAIT_TIME)
         except Exception as e:
             self.get_logger().error(f'❌ Motion failed: {e}')
             rclpy.shutdown()
@@ -77,29 +88,11 @@ class LettersNode(hm.HelloNode):
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1, 'forgot letter argument'
-    letter = sys.argv[1][0].lower()
-    print('LETTERS: starting now')
+    letter = sys.argv[1].lower()
     if letter in LETTER_WAYPOINTS.keys():
         node = LettersNode()
-        print('finished creating node')
         try:
-            # TODO: verify that this is the correct urdf to use (Michelle?)
-            urdf_path = '/home/cs225a1/.local/lib/python3.10/site-packages/stretch_urdf/RE2V0/stretch_description_RE2V0_tool_stretch_gripper.urdf'
-            chain = prep_chain(urdf_path)
-            print('finished creating chain')
-
-            import ikpy.urdf.utils
-            print('finished import')
-            tree = ikpy.urdf.utils.get_urdf_tree(urdf_path, "base_link")[0]
-            print('finished creating tree')
-            # import ipdb; ipdb.set_trace()
-            from IPython import display
-            display.display_png(tree)
-            import ipdb; ipdb.set_trace()
-            assert False
-
-            print('LETTERS: created chain')
-            node.main(chain, LETTER_WAYPOINTS[letter])
+            node.main(LETTER_WAYPOINTS[letter])
             node.new_thread.join()  # block until finish
         except:
             node.get_logger().info('interrupt received, shutting down')
