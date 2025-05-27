@@ -39,15 +39,18 @@ class ReSpeaker:
     def ask_for_order(self):
         self.play_audio(self.intro_path) 
 
-    def check_for_order(self):
-        if self.voice_command:
-            if 'one' in self.voice_command:
+    def check_for_order(self): 
+        print(self.voice_command)
+        if self.voice_command: 
+            tmp_voice = self.voice_command 
+            self.voice_command = None
+            if 'one' in tmp_voice:
                 self.play_audio(self.confirm_paths[0])
                 return 1
-            elif 'two' in self.voice_command:
+            elif 'two' in tmp_voice:
                 self.play_audio(self.confirm_paths[1])
                 return 2
-            elif 'three' in self.voice_command:
+            elif 'three' in tmp_voice:
                 self.play_audio(self.confirm_paths[2])
                 return 3
         return None

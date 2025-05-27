@@ -25,32 +25,32 @@ class WaiterNode(hm.HelloNode):
         self.create_timer(RATE, self.state_machine_loop) 
 
     def state_machine_loop(self): 
-        print(self.state.state)
         if self.state.state == 'init': 
             self.state.compute_state(self.queue) 
         elif self.state.state == 'collecting_order':  
             #self.asked = False  
             self.take_order()
-        elif self.state.sate == 'writing_label':
-            self.write_label
+        elif self.state.state == 'writing_label':
+            self.write_label()
     
-    def take_order(self):   
-        print('running take order')
-        if not self.asked:  
+    def take_order(self):    
+        if not self.asked: 
+            self.get_logger().info('Asking for order: ')
             self.respeaker.ask_for_order() 
             self.asked = True
         order_id = self.respeaker.check_for_order()
         if order_id:
-            self.get_logger().info(f'📦 Order received: {order}')
-            #self.state = 'done'   
+            self.get_logger().info(f'📦 Order received: {order}')   
             order_obj = order(order_id)
             self.queue.add_order(order_obj)   
-            self.get_logger().info('✅ Ording Task complete.') 
+            self.get_logger().info('✅ Ording Task complete.')   
+            self.asked = False
             self.state.compute_state(self.queue)  
     def write_label(self): 
         self.get_logger().info(f'🖊️ Writing label for order {self.queue.next_label()}') 
-        time.sleep(2)
-        self.get_logger().info('✅ Label written.') 
+        time.sleep(2)  
+        self.queue.next_label()
+        self.get_logger().info('✅ Label written.')  
         self.state.compute_state(self.queue)  
         
 # === MAIN ENTRY POINT ===
