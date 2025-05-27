@@ -4,22 +4,20 @@ import numpy as np
 import time
 import math
 
-INCHES_PER_METER = 39.37
-
 BANNED_LINK_NAMES = ['link_right_wheel', 'link_left_wheel', 'caster_link', 'link_gripper_finger_left', 'link_gripper_fingertip_left', 'link_gripper_finger_right', 'link_gripper_fingertip_right', 'link_head', 'link_head_pan', 'link_head_tilt', 'link_aruco_right_base', 'link_aruco_left_base', 'link_aruco_shoulder', 'link_aruco_top_wrist', 'link_aruco_inner_wrist', 'camera_bottom_screw_frame', 'camera_link', 'camera_depth_frame', 'camera_depth_optical_frame', 'camera_infra1_frame', 'camera_infra1_optical_frame', 'camera_infra2_frame', 'camera_infra2_optical_frame', 'camera_color_frame', 'camera_color_optical_frame', 'camera_accel_frame', 'camera_accel_optical_frame', 'camera_gyro_frame', 'camera_gyro_optical_frame', 'laser', 'respeaker_base', 'base_imu', 'link_puller']
 
 BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', 'joint_gripper_finger_left', 'joint_gripper_fingertip_left', 'joint_gripper_finger_right', 'joint_gripper_fingertip_right', 'joint_head', 'joint_head_pan', 'joint_head_tilt', 'joint_aruco_right_base', 'joint_aruco_left_base', 'joint_aruco_shoulder', 'joint_aruco_top_wrist', 'joint_aruco_inner_wrist', 'camera_joint', 'camera_link_joint', 'camera_depth_joint', 'camera_depth_optical_joint', 'camera_infra1_joint', 'camera_infra1_optical_joint', 'camera_infra2_joint', 'camera_infra2_optical_joint', 'camera_color_joint', 'camera_color_optical_joint', 'camera_accel_joint', 'camera_accel_optical_joint', 'camera_gyro_joint', 'camera_gyro_optical_joint', 'joint_laser', 'joint_respeaker', 'joint_base_imu', 'joint_puller']
 
+INCHES_PER_METER = 39.37
+EE_LENGTH = 5.45 * 2 / INCHES_PER_METER
+clamp = lambda x, l, h : max(min(x, h), l)
+sign = lambda x : (x > 0) - (x < 0)
+
 # implemented from scratch, using only 3 joints (arm lift, telescoping arm extension, and wrist yaw
-def EE_position_control_2(X, node, sleep_time=0, blocking=True):
+def EE_position_control_2(X, node, sleep_time=0, blocking=True, closed=True):
     # my base-frame coordinates: arm is connected to base at (0,0,0), x,y,z
     # +x points in the direction of the telescoping arm
     # +z points upward, that means +y points in direction of base's front (INKY label)
-
-    clamp = lambda x, l, h: max(min(x, h), l)
-    sign = lambda x : (x > 0) - (x < 0)
-
-    EE_LENGTH = 5.45 * 2 / INCHES_PER_METER  # ESTIMATE, TODO: update this more accurate
 
     # need to restrict position to reachable workspace
     clamp_X = (clamp(X[0], 0, 0.13 * 4 + 0.13),
@@ -34,7 +32,8 @@ def EE_position_control_2(X, node, sleep_time=0, blocking=True):
     # print(f'calculated theta for this movement: {theta}, {theta * sign(X[1])}')
     x_offset = EE_LENGTH * math.cos(theta)
 
-    node.move_to_pose({'joint_wrist_pitch': 0.0, 'joint_wrist_roll': 0.0, 'joint_gripper_finger_left': 0.0})
+    node.move_to_pose({'joint_wrist_pitch': 0.0, 'joint_wrist_roll': 0.0})
+    if closed: node.move_to_pose({'joint_gripper_finger_left': 0.0})
     node.move_to_pose({
         'joint_lift': X[2],
         'joint_arm': X[0] - x_offset,
@@ -47,7 +46,6 @@ def EE_position_control_2(X, node, sleep_time=0, blocking=True):
 
 # problem: node.joint_state reports different joints than the chain
 # so, reorder elements from the node.joint_state to be understood by IK chain
-# 
 # example: here is node.joint_state.names:
 # wrist_extension	0.0999952846055835
 # joint_lift	0.5995599066271622
