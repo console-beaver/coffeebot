@@ -6,7 +6,8 @@ import hello_helpers.hello_misc as hm
 
 # import classes here where your command functions are 
 from utils.respeaker import ReSpeaker 
-from utils.state_comp import orderQ, order, waiter_state, barista_state 
+from utils.state_comp import waiter_state 
+from utils.sharedOrderQ import SharedOrderQ, order 
 
 RATE = 1.0
 
@@ -15,7 +16,7 @@ class WaiterNode(hm.HelloNode):
         super().__init__()
         self.state = waiter_state() 
         self.asked = False
-        self.queue = orderQ() #TODO: both robots have to share the same queue object  
+        self.queue = SharedOrderQ() 
 
         hm.HelloNode.main(self, 'waiter_node', 'waiter_node', wait_for_first_pointcloud=False) 
 
@@ -27,8 +28,7 @@ class WaiterNode(hm.HelloNode):
     def state_machine_loop(self): 
         if self.state.state == 'init': 
             self.state.compute_state(self.queue) 
-        elif self.state.state == 'collecting_order':  
-            #self.asked = False  
+        elif self.state.state == 'collecting_order':    
             self.take_order()
         elif self.state.state == 'writing_label':
             self.write_label()
@@ -46,7 +46,8 @@ class WaiterNode(hm.HelloNode):
             self.get_logger().info('✅ Ording Task complete.')   
             self.asked = False
             self.state.compute_state(self.queue)  
-    def write_label(self): 
+    def write_label(self):  
+        """" TODO: add movement logic commands in order to write the label """ 
         self.get_logger().info(f'🖊️ Writing label for order {self.queue.next_label()}') 
         time.sleep(2)  
         self.queue.next_label()
