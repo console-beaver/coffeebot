@@ -377,7 +377,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
         distance_between_fingertips = distance_between_fully_open_fingertips
         prev_distance_between_fingertips = distance_between_fully_open_fingertips
 
-        if not use_yolo:
+        if not use_yolo or True:
             pipeline, profile = dh.start_d405(exposure)
 
         frames_since_toy_detected = 0
@@ -396,7 +396,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
             between_fingertips = None
             distance_between_fingertips = None
             
-            if not use_yolo:
+            if not use_yolo or True:
                 frames = pipeline.wait_for_frames()
                 depth_frame = frames.get_depth_frame()
                 color_frame = frames.get_color_frame()
@@ -610,7 +610,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 joint_state = controller.get_joint_state()
                 angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
                 robot.base.rotate_by(angle_to_zero)
-                #robot.base.rotate_by(-joint_state['base_odom_theta'])
+                # robot.base.rotate_by(-joint_state['base_odom_theta'])
                 robot.push_command()
                 robot.wait_command()
                 robot.base.translate_by(0.4)
@@ -760,6 +760,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                         cmd = { k: ( 0.0 if ((v > 0.0) and (joint_state[vel_cmd_to_pos[k]] > max_joint_state[vel_cmd_to_pos[k]])) else v ) for (k,v) in cmd.items()}
                         controller.set_command(cmd)
 
+            cv2.imshow('Features Used for Visual Servoing', image)
             if not use_yolo:
 
                 if toy_target is not None:
@@ -789,7 +790,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 
 
                 
-                cv2.imshow('Features Used for Visual Servoing', image)
+                # cv2.imshow('Features Used for Visual Servoing', image)
             cv2.waitKey(1)
 
             loop_timer.end_of_iteration()
