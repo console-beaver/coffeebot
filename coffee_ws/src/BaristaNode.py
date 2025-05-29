@@ -3,6 +3,8 @@
 import rclpy
 import time
 import hello_helpers.hello_misc as hm 
+import subprocess
+import sys
 
 # import classes here where your command functions are 
 from utils.state_comp import orderQ, order, barista_state 
@@ -15,6 +17,12 @@ class BaristaNode(hm.HelloNode):
         self.state = barista_state() 
         self.asked = False
         self.queue = orderQ() #TODO: both robots have to share the same queue object  
+
+        self.stations = {
+                         1: 'AB',
+                         2: 'BC',
+                         3: 'A'
+                        }
 
         hm.HelloNode.main(self, 'barista_node', 'barista_node', wait_for_first_pointcloud=False) 
 
@@ -42,6 +50,21 @@ class BaristaNode(hm.HelloNode):
         if coffee:
             self.get_logger().info(f'☕ Making coffee for order {coffee.order_number}') 
             time.sleep(2)
+            for station in self.stations[coffee.order_number]:
+                print(f'BARISTANODE: pouring from station {station} for order {coffee.order_number}')
+                # launch necessary background processes
+                p1 = subprocess.Popen([sys.executable, 'python3 send_d405_images.py'])
+                p2 = subprocess.Popen([sys.executable, 'xvfb-run -a python3 recv_and_yolo_d405_images.py -c cup'])
+
+                # visual servoing demo is blocking: run until complete
+                p3 = subprocess.run([sys.executable, f'python3 visual_servoing_demo.py -y --station {station}'], capture_output=True)
+                
+                # now kill background processes
+                p1.terminate()
+                p2.terminate()
+                time.sleep(1)
+                if p1.poll() is None: p1.kill()
+                if p2.poll() is None: p2.kill()
             self.get_logger().info('✅ Coffee made.')  
     
     def give_order_to_human(self): 
