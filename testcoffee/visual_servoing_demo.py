@@ -567,7 +567,9 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
                 # Return to pouring station
                 joint_state = controller.get_joint_state()
-                robot.base.rotate_by(-joint_state['base_odom_theta'])
+                angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
+                robot.base.rotate_by(angle_to_zero)
+                # robot.base.rotate_by(-joint_state['base_odom_theta'])
                 robot.push_command()
                 robot.wait_command()
                 robot.base.translate_by(-offset)
@@ -606,7 +608,9 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 robot.push_command()
                 robot.wait_command()
                 joint_state = controller.get_joint_state()
-                robot.base.rotate_by(-joint_state['base_odom_theta'])
+                angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
+                robot.base.rotate_by(angle_to_zero)
+                #robot.base.rotate_by(-joint_state['base_odom_theta'])
                 robot.push_command()
                 robot.wait_command()
                 robot.base.translate_by(0.4)
