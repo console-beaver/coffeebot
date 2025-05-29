@@ -18,6 +18,8 @@ import yolo_networking as yn
 from stretch_body import robot_params
 from stretch_body import hello_utils as hu
 
+DISPLAY_CAM_OVERRIDE = True  # display the live camera feed even if using yolo
+
 def draw_origin(image, camera_info, origin_xyz, color):
     radius = 6
     thickness = -1
@@ -319,6 +321,7 @@ def recenter_robot(robot):
         
 
 def main(use_yolo, use_remote_computer, exposure, station):
+    print("starting main")
     try:
         
         robot = rb.Robot()
@@ -337,6 +340,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
         controller = nvc.NormalizedVelocityControl(robot)
         controller.reset_base_odometry()
 
+        print(f'use_yolo: {use_yolo}')
         if not use_yolo: 
             marker_info = {}
             with open('aruco_marker_info.yaml') as f:
@@ -347,6 +351,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
             aruco_detector = ad.ArucoDetector(marker_info=marker_info, show_debug_images=True, use_apriltag_refinement=False, brighten_images=True)
             aruco_to_fingertips = af.ArucoToFingertips(default_height_above_mounting_surface=af.suctioncup_height['cup_bottom'])
         else:
+            print('use_yolo is True')
             yolo_context = zmq.Context()
             yolo_socket = yolo_context.socket(zmq.SUB)
             yolo_socket.setsockopt(zmq.SUBSCRIBE, b'')
@@ -366,6 +371,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                                                        timeout_proportional_gain,
                                                        debug_on=False)
 
+            print('debug YOLO socket set')
         first_frame = True
 
         behavior = 'reach'
@@ -377,7 +383,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
         distance_between_fingertips = distance_between_fully_open_fingertips
         prev_distance_between_fingertips = distance_between_fully_open_fingertips
 
-        if not use_yolo or True:
+        if not use_yolo:
             pipeline, profile = dh.start_d405(exposure)
 
         frames_since_toy_detected = 0
@@ -387,8 +393,11 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
         fingertips = {}
         
+        import random
+
         while True:
             loop_timer.start_of_iteration()
+            print(f'new loop iteration {random.randint(1,10)}')
 
             toy_target = None
             fingertip_left_pos = None       
@@ -396,7 +405,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
             between_fingertips = None
             distance_between_fingertips = None
             
-            if not use_yolo or True:
+            if not use_yolo:
                 frames = pipeline.wait_for_frames()
                 depth_frame = frames.get_depth_frame()
                 color_frame = frames.get_color_frame()
@@ -440,11 +449,23 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 #print('timeout_for_socket_poll_int =', timeout_for_socket_poll_int)
                 poll_results = yolo_socket.poll(timeout=timeout_for_socket_poll_int,
                                                 flags=zmq.POLLIN)
+                print('debug 3')
+                print(zmq.POLLIN)
+                print(poll_results)
+                print('debug 4')
                 if poll_results == zmq.POLLIN:
                     yolo_results = yolo_socket.recv_pyobj()
                     #print('yolo_results =', yolo_results)
                     fingertips = yolo_results.get('fingertips', None)
                     yolo = yolo_results.get('yolo')
+
+                    # extract raw camera data for display
+                    if DISPLAY_CAM_OVERRIDE:
+                        color_image = yolo_results.get('camera_image')
+                        camera_info = yolo_results.get('camera_info')
+                        if color_image is not None:
+                            image = np.copy(color_image)
+
                     # Select only 'cup' objects with grasp_center_xyz, pick closest
                     cups = [obj for obj in yolo if obj.get('name', '').lower() == 'cup' and 'grasp_center_xyz' in obj]
                     if cups:
@@ -454,6 +475,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 regulate_socket_poll.run_after_polling()
 
             print()
+            print(f'debug 2: {toy_target}')
 
             if use_yolo:
                 toy_name = 'Tennis Ball'
@@ -760,7 +782,8 @@ def main(use_yolo, use_remote_computer, exposure, station):
                         cmd = { k: ( 0.0 if ((v > 0.0) and (joint_state[vel_cmd_to_pos[k]] > max_joint_state[vel_cmd_to_pos[k]])) else v ) for (k,v) in cmd.items()}
                         controller.set_command(cmd)
 
-            cv2.imshow('Features Used for Visual Servoing', image)
+            # cv2.imshow('Features Used for Visual Servoing', image)
+            print('debug 1')
             if not use_yolo:
 
                 if toy_target is not None:
@@ -781,16 +804,34 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     draw_origin(image, camera_info, between_fingertips, (255, 255, 255))
 
                 
-                aruco_to_fingertips.draw_fingertip_frames(fingertips,
-                                                          image,
-                                                          camera_info,
-                                                          axis_length_in_m=0.02,
-                                                          draw_origins=True,
-                                                          write_coordinates=True)
+                if not use_yolo:
+                    aruco_to_fingertips.draw_fingertip_frames(fingertips,
+                                                              image,
+                                                              camera_info,
+                                                              axis_length_in_m=0.02,
+                                                              draw_origins=True,
+                                                              write_coordinates=True)
                 
 
                 
                 # cv2.imshow('Features Used for Visual Servoing', image)
+            elif DISPLAY_CAM_OVERRIDE:
+                # TODO: display imag
+                print(f'\n\n\nTOY_TARGET: {toy_target}\n\n\n')
+                if toy_target is not None:
+                    # draw blue circle for the toy target position
+                    draw_origin(image, camera_info, toy_target, (255, 0, 0))
+                    x,y,z = toy_target * 100.0
+                    width = toy_width_m
+                    text_lines = [
+                        "{:.1f} cm wide".format(width*100.0),
+                        "{:.1f}, {:.1f}, {:.1f} cm".format(x,y,z)
+                        ]
+                    
+                    center = np.round(dh.pixel_from_3d(toy_target, camera_info)).astype(np.int32)
+                    draw_text(image, center, text_lines)
+                    cv2.imshow('Features Used for Visual Servoing', image)
+
             cv2.waitKey(1)
 
             loop_timer.end_of_iteration()
@@ -806,6 +847,8 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
 
 if __name__ == '__main__':
+
+    print('visual servoing demo was called')
 
     parser = argparse.ArgumentParser(
         prog='Stretch 3 Visual Servoing Demo',
