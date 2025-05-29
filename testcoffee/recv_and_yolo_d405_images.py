@@ -82,6 +82,13 @@ def main(use_remote_computer, use_class_name):
                 first_frame = False
             
             send_dict = yolo_servo_perception.apply(color_image, depth_image)
+
+            # add camera image/info to dict for display purposes
+            send_dict['camera_image'] = color_image.copy()
+            send_dict['depth_image'] = depth_image.copy()
+            send_dict['camera_info'] = depth_camera_info
+            send_dict['depth_scale'] = depth_scale
+
             yolo_socket.send_pyobj(send_dict)
             
             cv2.waitKey(1)
