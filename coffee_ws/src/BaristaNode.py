@@ -7,8 +7,9 @@ import subprocess
 import sys
 
 # import classes here where your command functions are 
-from utils.state_comp import orderQ, order, barista_state 
-
+from utils.state_comp import barista_state 
+from utils.secrets import BLINKEY_IP, INKEY_IP
+from utils.sharedOrderQ import SharedOrderQ, order
 RATE = 1.0
 
 class BaristaNode(hm.HelloNode):
@@ -16,7 +17,7 @@ class BaristaNode(hm.HelloNode):
         super().__init__()
         self.state = barista_state() 
         self.asked = False
-        self.queue = orderQ() #TODO: both robots have to share the same queue object  
+        self.queue = SharedOrderQ(redis_host=BLINKEY_IP)  
 
         self.stations = {
                          1: 'AB',

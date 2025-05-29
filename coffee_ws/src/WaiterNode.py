@@ -2,12 +2,12 @@
 
 import rclpy
 import time
-import hello_helpers.hello_misc as hm 
+import hello_helpers.hello_misc as hm  
 
 # import classes here where your command functions are 
 from utils.respeaker import ReSpeaker 
 from utils.state_comp import waiter_state 
-from utils.sharedOrderQ import SharedOrderQ, order 
+from utils.sharedOrderQ import SharedOrderQ, order  
 
 RATE = 1.0
 
@@ -16,7 +16,7 @@ class WaiterNode(hm.HelloNode):
         super().__init__()
         self.state = waiter_state() 
         self.asked = False
-        self.queue = SharedOrderQ() 
+        self.queue = SharedOrderQ(redis_host='localhost') 
 
         hm.HelloNode.main(self, 'waiter_node', 'waiter_node', wait_for_first_pointcloud=False) 
 
@@ -50,7 +50,7 @@ class WaiterNode(hm.HelloNode):
         """" TODO: add movement logic commands in order to write the label """ 
         self.get_logger().info(f'🖊️ Writing label for order {self.queue.next_label()}') 
         time.sleep(2)  
-        self.queue.next_label()
+        #self.queue.next_label()
         self.get_logger().info('✅ Label written.')  
         self.state.compute_state(self.queue)  
         

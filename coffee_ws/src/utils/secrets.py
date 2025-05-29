@@ -1,0 +1,2 @@
+BLINKEY_IP = '127.0.1.1' 
+INKEY_IP = ''

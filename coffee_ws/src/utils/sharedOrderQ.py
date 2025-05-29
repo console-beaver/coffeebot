@@ -5,6 +5,10 @@ from collections import deque
 class order(): 
     def __init__(self, number):  
         self.order_number = number 
+    def __repr__(self):
+        return f'order({self.order_number})'
+    def __eq__(self, other):
+        return isinstance(other, order) and self.order_number == other.order_number 
 
 class SharedOrderQ:
     def __init__(self, redis_host='localhost', redis_port=6379, redis_key='shared_orderQ'):
