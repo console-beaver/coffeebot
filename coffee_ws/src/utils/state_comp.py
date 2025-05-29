@@ -1,35 +1,4 @@
-from collections import deque
-
-class orderQ(): 
-    def __init__(self): 
-        self.coffee = deque() 
-        self.labels = deque()   
-
-        self.writing = None 
-        self.brewing = None
-    
-    def add_order(self, order): 
-        self.coffee.append(order) 
-        self.labels.append(order)  
-
-    def next_label(self): 
-        if len(self.labels) > 0: 
-            self.writing = self.labels.popleft() 
-            return self.writing 
-        else: 
-            return None  
-        
-    def next_coffee(self): 
-        if len(self.coffee) > 0: 
-            self.brewing = self.coffee.popleft() 
-            return self.brewing 
-        else: 
-            return None 
-
-class order(): 
-    def __init__(self, number):  
-        self.order_number = number
-
+# from collections import deque  
 class waiter_state():  
     """
     This class is used to manage and determine the state of the waiter. 
@@ -70,3 +39,36 @@ class barista_state():
             self.state = 'brewing' 
         elif len(queue.coffee) == 0: 
             self.state = 'done_brewing'
+
+
+"""
+class orderQ(): 
+    def __init__(self): 
+        self.coffee = deque() 
+        self.labels = deque()   
+
+        self.writing = None 
+        self.brewing = None
+    
+    def add_order(self, order): 
+        self.coffee.append(order) 
+        self.labels.append(order)  
+
+    def next_label(self): 
+        if len(self.labels) > 0: 
+            self.writing = self.labels.popleft() 
+            return self.writing 
+        else: 
+            return None  
+        
+    def next_coffee(self): 
+        if len(self.coffee) > 0: 
+            self.brewing = self.coffee.popleft() 
+            return self.brewing 
+        else: 
+            return None 
+
+class order(): 
+    def __init__(self, number):  
+        self.order_number = number 
+"""

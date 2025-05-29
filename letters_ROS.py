@@ -19,7 +19,7 @@ LETTER_WAYPOINTS = {
 
 import rclpy
 import time
-import hello_helpers.hello_misc as hm 
+import hello_helpers.hello_misc as hm
 import sys
 import os
 from stretch_control import *
