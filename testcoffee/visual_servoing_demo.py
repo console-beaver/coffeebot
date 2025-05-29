@@ -328,17 +328,27 @@ def main(use_yolo, use_remote_computer, exposure, station):
         robot.startup()
 	
         
-        station_offsets = {'A': 0.4, 'B': 0.8, 'C': 1.2}
+        station_offsets = {'A': 0.4, 'B': 0.8, 'C': 1.2, 'D': 0.0}
         offset = station_offsets.get(station, 0.0)
          
         # Move from pouring station to pickup station
         robot.base.translate_by(offset)
         robot.push_command()
         robot.wait_command()
-        
-        recenter_robot(robot)
-        controller = nvc.NormalizedVelocityControl(robot)
-        controller.reset_base_odometry()
+
+        if station == 'D':
+            print("Station D selected: staying at pouring station and starting search.")
+            recenter_robot(robot)
+            controller = nvc.NormalizedVelocityControl(robot)
+            controller.reset_base_odometry()
+            behavior = 'reach'
+            skip_post_reach_routine = True
+        else:
+            recenter_robot(robot)
+            controller = nvc.NormalizedVelocityControl(robot)
+            controller.reset_base_odometry()
+            behavior = 'reach'
+            skip_post_reach_routine = False
 
         print(f'use_yolo: {use_yolo}')
         if not use_yolo: 
@@ -579,72 +589,89 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
             elif behavior == 'celebrate':
 
-                if prev_behavior != 'celebrate':
-                    celebrate_state_count = 0
-                prev_behavior = behavior
+                if station == 'D':
+                    print("Executing Station D behavior: drop in place.")
+                    recenter_robot(robot)
+                    robot.arm.move_to(0.5)
+                    robot.lift.move_to(0.9)
+                    robot.push_command()
+                    robot.wait_command()
+                    time.sleep(1.0)
+                    robot.end_of_arm.move_to('stretch_gripper', 100)
+                    robot.push_command()
+                    robot.wait_command()
+                    recenter_robot(robot)
+                    print("Station D sequence complete. Shutting down.")
+                    controller.stop()
+                    robot.stop()
+                    if not use_yolo:
+                        pipeline.stop()
+                    exit(0)
+                else:
+                    if prev_behavior != 'celebrate':
+                        celebrate_state_count = 0
+                    prev_behavior = behavior
 
-                # Return to pouring station
-                joint_state = controller.get_joint_state()
-                angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
-                robot.base.rotate_by(angle_to_zero)
-                # robot.base.rotate_by(-joint_state['base_odom_theta'])
-                robot.push_command()
-                robot.wait_command()
-                robot.base.translate_by(-offset)
-                robot.push_command()
-                robot.wait_command()
+                    # Return to pouring station
+                    joint_state = controller.get_joint_state()
+                    angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
+                    robot.base.rotate_by(angle_to_zero)
+                    # robot.base.rotate_by(-joint_state['base_odom_theta'])
+                    robot.push_command()
+                    robot.wait_command()
+                    robot.base.translate_by(-offset)
+                    robot.push_command()
+                    robot.wait_command()
 
-                # Pour sequence
-                recenter_robot(robot)
-                robot.arm.move_to(0.2)
-                robot.push_command()
-                robot.wait_command()
-                robot.end_of_arm.get_joint('wrist_roll').move_to(-1.745)
-                robot.push_command()
-                robot.wait_command()
-                time.sleep(5)
-                robot.end_of_arm.get_joint('wrist_roll').move_to(joint_state_center['wrist_roll_pos'])
-                robot.push_command()
-                robot.wait_command()
-                recenter_robot(robot)
+                    # Pour sequence
+                    recenter_robot(robot)
+                    robot.arm.move_to(0.2)
+                    robot.push_command()
+                    robot.wait_command()
+                    robot.end_of_arm.get_joint('wrist_roll').move_to(-1.745)
+                    robot.push_command()
+                    robot.wait_command()
+                    time.sleep(5)
+                    robot.end_of_arm.get_joint('wrist_roll').move_to(joint_state_center['wrist_roll_pos'])
+                    robot.push_command()
+                    robot.wait_command()
+                    recenter_robot(robot)
 
-                # Move to trash station (opposite direction of pickup)
-                robot.base.translate_by(-0.4)
-                robot.push_command()
-                robot.wait_command()
+                    # Move to trash station (opposite direction of pickup)
+                    robot.base.translate_by(-0.4)
+                    robot.push_command()
+                    robot.wait_command()
 
-                # Drop the cup
-                robot.arm.move_to(0.2)
-                robot.push_command()
-                robot.wait_command()
-                robot.end_of_arm.move_to('stretch_gripper', 100)
-                robot.push_command()
-                robot.wait_command()
+                    # Drop the cup
+                    robot.arm.move_to(0.2)
+                    robot.push_command()
+                    robot.wait_command()
+                    robot.end_of_arm.move_to('stretch_gripper', 100)
+                    robot.push_command()
+                    robot.wait_command()
 
-                # Return to pouring station
-                robot.arm.move_to(joint_state_center['arm_pos'])
-                robot.push_command()
-                robot.wait_command()
-                joint_state = controller.get_joint_state()
-                angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
-                robot.base.rotate_by(angle_to_zero)
-                # robot.base.rotate_by(-joint_state['base_odom_theta'])
-                robot.push_command()
-                robot.wait_command()
-                robot.base.translate_by(0.4)
-                robot.push_command()
-                robot.wait_command()
-                recenter_robot(robot)
+                    # Return to pouring station
+                    robot.arm.move_to(joint_state_center['arm_pos'])
+                    robot.push_command()
+                    robot.wait_command()
+                    joint_state = controller.get_joint_state()
+                    angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
+                    robot.base.rotate_by(angle_to_zero)
+                    # robot.base.rotate_by(-joint_state['base_odom_theta'])
+                    robot.push_command()
+                    robot.wait_command()
+                    robot.base.translate_by(0.4)
+                    robot.push_command()
+                    robot.wait_command()
+                    recenter_robot(robot)
 
-                cmd = zero_vel.copy()
-                behavior = 'reach'
-                pre_reach = True
-
-                if not grasping_the_target:
-                    cmd = zero_vel.copy()
-                    behavior = 'disappointed'
-
-                celebrate_state_count = celebrate_state_count + 1
+                    # Cleanly exit the program after celebration
+                    print("Sequence complete. Shutting down.")
+                    controller.stop()
+                    robot.stop()
+                    if not use_yolo:
+                        pipeline.stop()
+                    exit(0)
 
             elif behavior == 'disappointed':
 
@@ -854,8 +881,8 @@ if __name__ == '__main__':
 
     parser.add_argument('-e', '--exposure', action='store', type=str, default='low', help=f'Set the D405 exposure to {dh.exposure_keywords} or an integer in the range {dh.exposure_range}')
 
-    parser.add_argument('--station', type=str, choices=['A', 'B', 'C'], required=True,
-                        help='Starting station: A (0.4m), B (0.8m), or C (1.2m)')
+    parser.add_argument('--station', type=str, choices=['A', 'B', 'C', 'D'], required=True,
+                        help='Starting station: A (0.4m), B (0.8m), C (1.2m), or D (pouring station)')
 
     args = parser.parse_args()
     use_yolo = args.yolo
