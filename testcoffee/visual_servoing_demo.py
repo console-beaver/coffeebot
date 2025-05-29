@@ -449,10 +449,6 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 #print('timeout_for_socket_poll_int =', timeout_for_socket_poll_int)
                 poll_results = yolo_socket.poll(timeout=timeout_for_socket_poll_int,
                                                 flags=zmq.POLLIN)
-                print('debug 3')
-                print(zmq.POLLIN)
-                print(poll_results)
-                print('debug 4')
                 if poll_results == zmq.POLLIN:
                     yolo_results = yolo_socket.recv_pyobj()
                     #print('yolo_results =', yolo_results)
@@ -816,8 +812,6 @@ def main(use_yolo, use_remote_computer, exposure, station):
                 
                 # cv2.imshow('Features Used for Visual Servoing', image)
             elif DISPLAY_CAM_OVERRIDE:
-                # TODO: display imag
-                print(f'\n\n\nTOY_TARGET: {toy_target}\n\n\n')
                 if toy_target is not None:
                     # draw blue circle for the toy target position
                     draw_origin(image, camera_info, toy_target, (255, 0, 0))
