@@ -14,13 +14,14 @@ RATE = 1.0
 MARKER_UP = 1.0
 MARKER_DOWN = 1 - 0.022
 
+
 class WaiterNode(hm.HelloNode):
     def __init__(self): 
         super().__init__()
         self.state = waiter_state() 
         self.asked = False
-        self.queue = SharedOrderQ(redis_host='localhost') 
-
+        self.queue = SharedOrderQ(redis_host='localhost', redis_port=6400, redis_key='shared_orderQ') 
+        
 #       all xyz coordinates use the following coordinate frame:
 #       +x direction points in direction of telescoping arm extension
 #       +y direction points in the forward direction of the base
@@ -60,12 +61,14 @@ class WaiterNode(hm.HelloNode):
             self.asked = True
         order_id = self.respeaker.check_for_order()
         if order_id:
-            self.get_logger().info(f'📦 Order received: {order}')   
-            order_obj = order(order_id)
-            self.queue.add_order(order_obj)   
+            self.get_logger().info(f'📦 Order received: {order_id}')   
+            order_obj = order(order_id) 
+            self.queue.add_order(order_obj) 
+            order_id = None
             self.get_logger().info('✅ Ording Task complete.')   
             self.asked = False
-            self.state.compute_state(self.queue)
+            self.state.compute_state(self.queue) 
+            print('the Q:', self.queue.labels, self.queue.coffee)
     def write_label(self):  
         """" TODO: add movement logic commands in order to write the label """ 
         self.get_logger().info(f'🖊️ Writing label for order {self.queue.next_label()}') 

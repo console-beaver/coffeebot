@@ -11,9 +11,12 @@ class order():
         return isinstance(other, order) and self.order_number == other.order_number 
 
 class SharedOrderQ:
-    def __init__(self, redis_host='localhost', redis_port=6379, redis_key='shared_orderQ'):
+    def __init__(self, redis_host='localhost', redis_port=6379, redis_key='shared_orderQ'): 
+
         self.redis = redis.Redis(host=redis_host, port=redis_port, decode_responses=False)
-        self.redis_key = redis_key
+        self.redis_key = redis_key 
+
+        self.redis.delete(self.redis_key)
 
         self.coffee = deque()
         self.labels = deque()
