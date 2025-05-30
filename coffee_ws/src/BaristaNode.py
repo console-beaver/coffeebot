@@ -34,7 +34,8 @@ class BaristaNode(hm.HelloNode):
 
     def state_machine_loop(self):  
         # TODO: add correct state design and include how to compute logic in utils/state_comp.py
-        if self.state.state == 'init': 
+        if self.state.state == 'init':  
+            print('my queue', self.queue.coffee.number)
             self.state.compute_state(self.queue) 
         elif self.state.state == 'making coffee 1':    
             self.make_coffee()
