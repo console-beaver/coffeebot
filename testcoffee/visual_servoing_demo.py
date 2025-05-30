@@ -19,7 +19,7 @@ from stretch_body import robot_params
 from stretch_body import hello_utils as hu
 
 DISPLAY_CAM_OVERRIDE = True  # display the live camera feed even if using yolo
-
+#adding comment
 def draw_origin(image, camera_info, origin_xyz, color):
     radius = 6
     thickness = -1
