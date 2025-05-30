@@ -596,7 +596,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     print("Executing Station D behavior: drop in place.")
                     recenter_robot(robot)
                     robot.arm.move_to(0.5)
-                    robot.lift.move_to(0.95)
+                    robot.lift.move_to(0.9)
                     robot.push_command()
                     robot.wait_command()
                     time.sleep(1.0)
@@ -609,8 +609,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.stop()
                     if not use_yolo:
                         pipeline.stop()
-                    import sys
-                    sys.exit(0)
+                    return
                 else:
                     if prev_behavior != 'celebrate':
                         celebrate_state_count = 0
@@ -629,6 +628,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
                     # Pour sequence
                     recenter_robot(robot)
+                    robot.lift.move_to(1.02)
                     robot.arm.move_to(0.2)
                     robot.push_command()
                     robot.wait_command()
@@ -675,8 +675,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.stop()
                     if not use_yolo:
                         pipeline.stop()
-                    import sys
-                    sys.exit(0)
+                    return
 
             elif behavior == 'disappointed':
 
@@ -906,4 +905,5 @@ if __name__ == '__main__':
     if not dh.exposure_argument_is_valid(exposure):
         raise argparse.ArgumentTypeError(f'The provided exposure setting, {exposure}, is not a valide keyword, {dh.exposure_keywords}, or is outside of the allowed numeric range, {dh.exposure_range}.')
 
-    main(use_yolo, use_remote_computer, exposure, args.station)
+    import sys
+    sys.exit(main(use_yolo, use_remote_computer, exposure, args.station))
