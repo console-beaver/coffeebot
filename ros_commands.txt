@@ -1,3 +1,6 @@
 run ros driver: ros2 launch stretch_core stretch_driver.launch.py 
 to home: home 
-run the speaker/audio: ros2 launch respeaker_ros2 respeaker.launch.py
+run the speaker/audio: ros2 launch respeaker_ros2 respeaker.launch.py 
+
+redis-cli -h 127.0.0.1 -p 6379 DEL shared_orderQ
+
