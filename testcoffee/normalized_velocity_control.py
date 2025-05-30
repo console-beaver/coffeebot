@@ -573,7 +573,7 @@ class NormalizedVelocityControl():
         while True: 
             with self.lock:
                 if self.stop_loop:
-                    exit()
+                    return
                 if self.new_command_received:
                     self._execute(self.command)
                     self.new_command_received = False

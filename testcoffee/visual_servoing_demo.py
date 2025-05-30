@@ -314,7 +314,7 @@ def recenter_robot(robot):
     robot.push_command()
     robot.wait_command()
 
-    robot.lift.move_to(1.05)
+    robot.lift.move_to(0.95)
     robot.push_command()
     robot.wait_command()
 
@@ -596,7 +596,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     print("Executing Station D behavior: drop in place.")
                     recenter_robot(robot)
                     robot.arm.move_to(0.5)
-                    robot.lift.move_to(0.9)
+                    robot.lift.move_to(0.95)
                     robot.push_command()
                     robot.wait_command()
                     time.sleep(1.0)
@@ -609,7 +609,8 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.stop()
                     if not use_yolo:
                         pipeline.stop()
-                    exit(0)
+                    import sys
+                    sys.exit(0)
                 else:
                     if prev_behavior != 'celebrate':
                         celebrate_state_count = 0
@@ -674,7 +675,8 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.stop()
                     if not use_yolo:
                         pipeline.stop()
-                    exit(0)
+                    import sys
+                    sys.exit(0)
 
             elif behavior == 'disappointed':
 
