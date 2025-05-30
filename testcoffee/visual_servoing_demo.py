@@ -20,7 +20,8 @@ import yolo_networking as yn
 from stretch_body import robot_params
 from stretch_body import hello_utils as hu
 
-DISPLAY_CAM_OVERRIDE = True  # display the live camera feed even if using yolo
+# Override for displaying camera images. Set to False to disable all cv2.imshow/waitKey calls (e.g., on headless systems).
+DISPLAY_CAM_OVERRIDE = False  # Disable GUI display on systems without GUI
 #adding comment
 def draw_origin(image, camera_info, origin_xyz, color):
     radius = 6
@@ -809,65 +810,64 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
             # cv2.imshow('Features Used for Visual Servoing', image)
             print('debug 1')
+            # Visualization section for OpenCV (not YOLO)
             if not use_yolo:
-
                 if toy_target is not None:
                     # draw blue circle for the toy target position
                     draw_origin(image, camera_info, toy_target, (255, 0, 0))
-                    x,y,z = toy_target * 100.0
+                    x, y, z = toy_target * 100.0
                     width = toy_width_m
                     text_lines = [
-                        "{:.1f} cm wide".format(width*100.0),
-                        "{:.1f}, {:.1f}, {:.1f} cm".format(x,y,z)
-                        ]
-                    
+                        "{:.1f} cm wide".format(width * 100.0),
+                        "{:.1f}, {:.1f}, {:.1f} cm".format(x, y, z)
+                    ]
                     center = np.round(dh.pixel_from_3d(toy_target, camera_info)).astype(np.int32)
                     draw_text(image, center, text_lines)
 
-                if between_fingertips is not None: 
+                if between_fingertips is not None:
                     # draw white circle for point between fingertip
                     draw_origin(image, camera_info, between_fingertips, (255, 255, 255))
 
                 if not use_yolo:
-                    aruco_to_fingertips.draw_fingertip_frames(fingertips,
-                                                              image,
-                                                              camera_info,
-                                                              axis_length_in_m=0.02,
-                                                              draw_origins=True,
-                                                              write_coordinates=True)
+                    aruco_to_fingertips.draw_fingertip_frames(
+                        fingertips,
+                        image,
+                        camera_info,
+                        axis_length_in_m=0.02,
+                        draw_origins=True,
+                        write_coordinates=True
+                    )
 
-                # Show image with try/except to prevent GUI errors
-                try:
-                    cv2.imshow('Features Used for Visual Servoing', image)
-                except cv2.error as e:
-                    print("Could not open display window, continuing without visualization.")
+                # Only show images if display override is enabled
+                if DISPLAY_CAM_OVERRIDE:
+                    try:
+                        cv2.imshow('Features Used for Visual Servoing', image)
+                        cv2.waitKey(1)
+                    except Exception as e:
+                        print("Display failed:", e)
 
+            # Visualization section for YOLO
             elif DISPLAY_CAM_OVERRIDE:
                 if toy_target is not None:
                     # draw blue circle for the toy target position
                     draw_origin(image, camera_info, toy_target, (255, 0, 0))
-                    x,y,z = toy_target * 100.0
+                    x, y, z = toy_target * 100.0
                     width = toy_width_m
                     text_lines = [
-                        "{:.1f} cm wide".format(width*100.0),
-                        "{:.1f}, {:.1f}, {:.1f} cm".format(x,y,z)
-                        ]
-                    
+                        "{:.1f} cm wide".format(width * 100.0),
+                        "{:.1f}, {:.1f}, {:.1f} cm".format(x, y, z)
+                    ]
                     center = np.round(dh.pixel_from_3d(toy_target, camera_info)).astype(np.int32)
                     draw_text(image, center, text_lines)
-                # Show image with try/except to prevent GUI errors (YOLO override)
+                # Only show images if display override is enabled
                 try:
                     cv2.imshow('Features Used for Visual Servoing', image)
-                except cv2.error as e:
-                    print("Could not open display window, continuing without visualization.")
-
-            try:
-                cv2.waitKey(1)
-            except cv2.error as e:
-                print("Could not process display window event, continuing without visualization.")
+                    cv2.waitKey(1)
+                except Exception as e:
+                    print("Display failed:", e)
 
             loop_timer.end_of_iteration()
-            if print_timing: 
+            if print_timing:
                 loop_timer.pretty_print(minimum=True)
     finally:
         controller.stop()
