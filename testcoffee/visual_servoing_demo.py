@@ -826,7 +826,6 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     # draw white circle for point between fingertip
                     draw_origin(image, camera_info, between_fingertips, (255, 255, 255))
 
-                
                 if not use_yolo:
                     aruco_to_fingertips.draw_fingertip_frames(fingertips,
                                                               image,
@@ -834,10 +833,13 @@ def main(use_yolo, use_remote_computer, exposure, station):
                                                               axis_length_in_m=0.02,
                                                               draw_origins=True,
                                                               write_coordinates=True)
-                
 
-                
-                # cv2.imshow('Features Used for Visual Servoing', image)
+                # Show image with try/except to prevent GUI errors
+                try:
+                    cv2.imshow('Features Used for Visual Servoing', image)
+                except cv2.error as e:
+                    print("Could not open display window, continuing without visualization.")
+
             elif DISPLAY_CAM_OVERRIDE:
                 if toy_target is not None:
                     # draw blue circle for the toy target position
@@ -851,9 +853,16 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     
                     center = np.round(dh.pixel_from_3d(toy_target, camera_info)).astype(np.int32)
                     draw_text(image, center, text_lines)
+                # Show image with try/except to prevent GUI errors (YOLO override)
+                try:
                     cv2.imshow('Features Used for Visual Servoing', image)
+                except cv2.error as e:
+                    print("Could not open display window, continuing without visualization.")
 
-            cv2.waitKey(1)
+            try:
+                cv2.waitKey(1)
+            except cv2.error as e:
+                print("Could not process display window event, continuing without visualization.")
 
             loop_timer.end_of_iteration()
             if print_timing: 
