@@ -48,7 +48,7 @@ class ReSpeaker:
                 self.play_audio(self.confirm_paths[0]) 
                 tmp_voice = None
                 return 1
-            elif 'rhea' or 'ria' in tmp_voice:
+            elif 'rhea' in tmp_voice or 'ria' in tmp_voice and 'adrian' not in tmp_voice:
                 self.play_audio(self.confirm_paths[1]) 
                 tmp_voice = None
                 return 2
