@@ -1,3 +1,5 @@
+import os
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
 import d405_helpers as dh
 import pyrealsense2 as rs
 import numpy as np
