@@ -593,23 +593,23 @@ def main(use_yolo, use_remote_computer, exposure, station):
             elif behavior == 'celebrate':
 
                 if station == 'D':
-            print("Executing Station D behavior: drop in place.")
-            recenter_robot(robot)
-            robot.arm.move_to(0.55)
-            robot.lift.move_to(0.9)
-            robot.push_command()
-            robot.wait_command()
-            time.sleep(1.0)
-            robot.end_of_arm.move_to('stretch_gripper', 100)
-            robot.push_command()
-            robot.wait_command()
-            recenter_robot(robot)
-            print("Station D sequence complete. Shutting down.")
-            controller.stop()
-            robot.stop()
-            if not use_yolo:
-                pipeline.stop()
-            return
+                    print("Executing Station D behavior: drop in place.")
+                    recenter_robot(robot)
+                    robot.arm.move_to(0.55)
+                    robot.lift.move_to(0.9)
+                    robot.push_command()
+                    robot.wait_command()
+                    time.sleep(1.0)
+                    robot.end_of_arm.move_to('stretch_gripper', 100)
+                    robot.push_command()
+                    robot.wait_command()
+                    recenter_robot(robot)
+                    print("Station D sequence complete. Shutting down.")
+                    controller.stop()
+                    robot.stop()
+                    if not use_yolo:
+                        pipeline.stop()
+                    return
                 else:
                     if prev_behavior != 'celebrate':
                         celebrate_state_count = 0
