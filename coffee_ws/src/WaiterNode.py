@@ -8,8 +8,11 @@ import hello_helpers.hello_misc as hm
 from utils.respeaker import ReSpeaker 
 from utils.state_comp import waiter_state 
 from utils.sharedOrderQ import SharedOrderQ, order  
+from utils.ee_pos_control import move_EE_to_xyz
 
 RATE = 1.0
+MARKER_UP = 1.0
+MARKER_DOWN = 1 - 0.022
 
 class WaiterNode(hm.HelloNode):
     def __init__(self): 
@@ -18,12 +21,29 @@ class WaiterNode(hm.HelloNode):
         self.asked = False
         self.queue = SharedOrderQ(redis_host='localhost') 
 
+#       all xyz coordinates use the following coordinate frame:
+#       +x direction points in direction of telescoping arm extension
+#       +y direction points in the forward direction of the base
+#       +z direction points upward from the base
+        self.waypoints = {
+                          # 'home': ((0.0, 0.0, MARKER_UP), (0.0, 0.02, MARKER_UP), (0.0, 0.05, MARKER_UP), (0.0, 0.07, MARKER_UP), (0.0, 0.10, MARKER_UP)),
+                          'home': ((0.0, 0.0, MARKER_UP)),
+                          '1': ()
+                         }
+
         hm.HelloNode.main(self, 'waiter_node', 'waiter_node', wait_for_first_pointcloud=False) 
 
+
+
     def main(self):  
+        print('HELLO')
         self.respeaker = ReSpeaker(self) # self is the node itself 
         self.get_logger().info('✅ Waiter Node initialized.') 
         self.create_timer(RATE, self.state_machine_loop) 
+
+        print('DEBUG')
+
+        self.write_label()
 
     def state_machine_loop(self): 
         if self.state.state == 'init': 
@@ -45,12 +65,14 @@ class WaiterNode(hm.HelloNode):
             self.queue.add_order(order_obj)   
             self.get_logger().info('✅ Ording Task complete.')   
             self.asked = False
-            self.state.compute_state(self.queue)  
+            self.state.compute_state(self.queue)
     def write_label(self):  
         """" TODO: add movement logic commands in order to write the label """ 
         self.get_logger().info(f'🖊️ Writing label for order {self.queue.next_label()}') 
         time.sleep(2)  
         #self.queue.next_label()
+        #for point in self.waypoints['home']:
+           # move_EE_to_xyz(point, self, sleep_time=2)
         self.get_logger().info('✅ Label written.')  
         self.state.compute_state(self.queue)  
         
