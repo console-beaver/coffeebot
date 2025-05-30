@@ -593,23 +593,23 @@ def main(use_yolo, use_remote_computer, exposure, station):
             elif behavior == 'celebrate':
 
                 if station == 'D':
-                    print("Executing Station D behavior: drop in place.")
-                    recenter_robot(robot)
-                    robot.arm.move_to(0.5)
-                    robot.lift.move_to(0.9)
-                    robot.push_command()
-                    robot.wait_command()
-                    time.sleep(1.0)
-                    robot.end_of_arm.move_to('stretch_gripper', 100)
-                    robot.push_command()
-                    robot.wait_command()
-                    recenter_robot(robot)
-                    print("Station D sequence complete. Shutting down.")
-                    controller.stop()
-                    robot.stop()
-                    if not use_yolo:
-                        pipeline.stop()
-                    return
+            print("Executing Station D behavior: drop in place.")
+            recenter_robot(robot)
+            robot.arm.move_to(0.55)
+            robot.lift.move_to(0.9)
+            robot.push_command()
+            robot.wait_command()
+            time.sleep(1.0)
+            robot.end_of_arm.move_to('stretch_gripper', 100)
+            robot.push_command()
+            robot.wait_command()
+            recenter_robot(robot)
+            print("Station D sequence complete. Shutting down.")
+            controller.stop()
+            robot.stop()
+            if not use_yolo:
+                pipeline.stop()
+            return
                 else:
                     if prev_behavior != 'celebrate':
                         celebrate_state_count = 0
@@ -632,7 +632,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.arm.move_to(0.2)
                     robot.push_command()
                     robot.wait_command()
-                    robot.end_of_arm.get_joint('wrist_roll').move_to(-1.745)
+                    robot.end_of_arm.get_joint('wrist_roll').move_to(-1.9)
                     robot.push_command()
                     robot.wait_command()
                     time.sleep(5)
@@ -876,6 +876,18 @@ def main(use_yolo, use_remote_computer, exposure, station):
         if not use_yolo:
             pipeline.stop()
 
+        # Additional cleanup commands
+        import cv2
+        cv2.destroyAllWindows()
+
+        import threading
+        print("Remaining threads after shutdown:")
+        for t in threading.enumerate():
+            print(f"Thread: {t.name}")
+
+        import os
+        os._exit(0)  # Force exit if needed
+
 
 
 
@@ -907,3 +919,5 @@ if __name__ == '__main__':
 
     import sys
     sys.exit(main(use_yolo, use_remote_computer, exposure, args.station))
+
+    print("You should not see this — process should have exited.")
