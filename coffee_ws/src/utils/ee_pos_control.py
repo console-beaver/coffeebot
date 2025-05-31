@@ -29,13 +29,15 @@ the function takes the following parameters:
     -interp_points: optional int, if nonzero adds points between the current
         ...position at the time of the call, and the target position (X)
     -closed: optional bool, if true closes the gripper during the movement
+    -force_check: optional bool, adds force check only to lift arm movement
 """
 def move_EE_to_xyz(X,  # the XYZ position
                    node,  # a node object which inherits from hm.HelloNode
                    sleep_time=0,  # time in seconds
                    blocking=True,
                    interp_info=None,  # number of points to add
-                   closed=True
+                   closed=True,
+                   force_check=False
                   ):
 
     if interp_info is not None and len(interp_info) == 2 and interp_info[1] > 0:
@@ -46,7 +48,7 @@ def move_EE_to_xyz(X,  # the XYZ position
         next_point = np.asarray(X, dtype=float)
         for t in t_values:
             interp_point = tuple(prev_point + t * (next_point - prev_point))
-            EE_position_control_2(interp_point, node, blocking=False, sleep_time=0.15, closed=closed)
+            EE_position_control_2(interp_point, node, blocking=False, sleep_time=0.15, closed=closed, force_check=force_check)
     else:
         print('moving EE to xyz position without interp')
-    EE_position_control_2(X, node, sleep_time=sleep_time, blocking=blocking, closed=closed)
+    EE_position_control_2(X, node, sleep_time=sleep_time, blocking=blocking, closed=closed, force_check=force_check)
