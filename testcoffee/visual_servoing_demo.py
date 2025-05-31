@@ -331,7 +331,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
         robot.startup()
 	
         
-        station_offsets = {'A': 0.45, 'B': 0.85, 'C': 1.25, 'D': 0.0}
+        station_offsets = {'A': 0.5, 'B': 0.9, 'C': 1.3, 'D': 0.0}
         offset = station_offsets.get(station, 0.0)
          
         # Move from pouring station to pickup station
