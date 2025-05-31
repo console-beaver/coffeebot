@@ -2,7 +2,9 @@
 
 import math
 import numpy as np
-from ....letters_ROS import EE_position_control_2
+import sys
+sys.path.append('/home/cs225a1/coffeebot')
+from letters_ROS import EE_position_control_2
 
 INCHES_PER_METER = 39.37
 EE_LENGTH = 5.45 * 2 / INCHES_PER_METER
@@ -41,7 +43,7 @@ def move_EE_to_xyz(X,  # the XYZ position
         start_position, interp_points = interp_info
         t_values = np.linspace(0, 1, interp_points + 2)[1:-1]
         prev_point = np.asarray(start_position, dtype=float)
-        next_point = np.asarray(point, dtype=float)
+        next_point = np.asarray(X, dtype=float)
         for t in t_values:
             interp_point = tuple(prev_point + t * (next_point - prev_point))
             EE_position_control_2(interp_point, node, blocking=False, sleep_time=0.15, closed=closed)
