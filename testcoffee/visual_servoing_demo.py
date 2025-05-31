@@ -331,7 +331,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
         robot.startup()
 	
         
-        station_offsets = {'A': 0.4, 'B': 0.8, 'C': 1.2, 'D': 0.0}
+        station_offsets = {'A': 0.45, 'B': 0.85, 'C': 1.25, 'D': 0.0}
         offset = station_offsets.get(station, 0.0)
          
         # Move from pouring station to pickup station
@@ -642,7 +642,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     recenter_robot(robot)
 
                     # Move to trash station (opposite direction of pickup)
-                    robot.base.translate_by(-0.4)
+                    robot.base.translate_by(-0.6)
                     robot.push_command()
                     robot.wait_command()
 
@@ -664,7 +664,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     # robot.base.rotate_by(-joint_state['base_odom_theta'])
                     robot.push_command()
                     robot.wait_command()
-                    robot.base.translate_by(0.4)
+                    robot.base.translate_by(0.6)
                     robot.push_command()
                     robot.wait_command()
                     recenter_robot(robot)
