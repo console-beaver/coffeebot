@@ -24,7 +24,7 @@ ros2 launch stretch_core stretch_driver.launch.py
 
 ros2 launch respeaker_ros2 respeaker.launch.py  
 
-3. Run the nod e 
+3. Run the node 
 python3 WaiterNode 
 
 Notes: run 1 - 2 from home dir, run WaiterNode from 
