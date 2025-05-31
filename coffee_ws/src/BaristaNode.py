@@ -17,7 +17,7 @@ class BaristaNode(hm.HelloNode):
         super().__init__()
         self.state = barista_state() 
         self.asked = False
-        self.queue = SharedOrderQ(redis_host=INKEY_IP, redis_port=6400)  
+        self.queue = SharedOrderQ(redis_host=BLINKEY_IP, redis_port=6400)  
 
         # placeholder for now, TODO: populate stations with correct list for each order
         self.stations = {
