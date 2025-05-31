@@ -17,7 +17,7 @@ class BaristaNode(hm.HelloNode):
         super().__init__()
         self.state = barista_state() 
         self.asked = False
-        self.queue = SharedOrderQ(redis_host=BLINKEY_IP)  
+        self.queue = SharedOrderQ(redis_host=INKEY_IP, redis_port=6400)  
 
         # placeholder for now, TODO: populate stations with correct list for each order
         self.stations = {
@@ -34,8 +34,11 @@ class BaristaNode(hm.HelloNode):
 
     def state_machine_loop(self):  
         # TODO: add correct state design and include how to compute logic in utils/state_comp.py
-        if self.state.state == 'init': 
-            self.state.compute_state(self.queue) 
+        self.queue.load_from_redis()
+        if self.state.state == 'init':  
+            self.state.compute_state(self.queue)  
+        elif self.state.state == 'brewing' or self.state.state == 'done_brewing': 
+            print('The Q: ', self.queue.coffee, self.queue.labels)
         elif self.state.state == 'making coffee 1':    
             self.make_coffee()
         elif self.state.state == 'making coffee 2': 

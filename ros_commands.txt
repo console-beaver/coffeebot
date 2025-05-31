@@ -1,3 +1,31 @@
-run ros driver: ros2 launch stretch_core stretch_driver.launch.py 
+# Good practice to do fisrt at start:  
 to home: home 
-run the speaker/audio: ros2 launch respeaker_ros2 respeaker.launch.py
+
+
+# To Run the waiter:  
+
+1. Turn on the redis server (both robots need to make and publish q so this should always be done first)  
+
+1.1: clear the queue if you want to start with an empty queue between runs (Usally you want this) 
+redis-cli -h 127.0.0.1 -p 6379 DEL shared_orderQ 
+
+1.2: Start the sever at localhost (from waiter robot) at port 6400 
+redis-server --port 6400 --protected-mode no  
+
+2. Run the following ros launch files 
+2.1: for general ros and movement: 
+ros2 launch stretch_core stretch_driver.launch.py   
+
+2.2: for the respeaker (speech and mic)  
+*If on blinkey you may need to rebuild and source (for every new terminal too): 
+    cd ~/ament_ws
+    colcon build 
+    source ~/ament_ws/install/setup.bash
+
+ros2 launch respeaker_ros2 respeaker.launch.py  
+
+3. Run the nod e 
+python3 WaiterNode 
+
+Notes: run 1 - 2 from home dir, run WaiterNode from 
+coffeebot/coffee_ws/src 

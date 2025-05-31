@@ -44,13 +44,19 @@ class ReSpeaker:
         if self.voice_command: 
             tmp_voice = self.voice_command 
             self.voice_command = None
-            if 'one' in tmp_voice:
-                self.play_audio(self.confirm_paths[0])
+            if 'ethan' in tmp_voice:
+                self.play_audio(self.confirm_paths[0]) 
+                tmp_voice = None
                 return 1
-            elif 'two' in tmp_voice:
-                self.play_audio(self.confirm_paths[1])
+            elif 'rhea' in tmp_voice or 'ria' in tmp_voice and 'adrian' not in tmp_voice:
+                self.play_audio(self.confirm_paths[1]) 
+                tmp_voice = None
                 return 2
-            elif 'three' in tmp_voice:
+            elif 'adrian' in tmp_voice: 
+                tmp_voice = None
                 self.play_audio(self.confirm_paths[2])
-                return 3
+                return 3 
+            elif 'osama' in tmp_voice: 
+                self.play_audio(self.confirm_paths[0]) 
+                return 4
         return None

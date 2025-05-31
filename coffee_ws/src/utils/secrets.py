@@ -1,2 +1,2 @@
 BLINKEY_IP = '127.0.1.1' 
-INKEY_IP = ''
+INKEY_IP = '171.64.68.11'

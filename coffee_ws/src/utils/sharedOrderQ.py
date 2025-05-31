@@ -11,9 +11,12 @@ class order():
         return isinstance(other, order) and self.order_number == other.order_number 
 
 class SharedOrderQ:
-    def __init__(self, redis_host='localhost', redis_port=6379, redis_key='shared_orderQ'):
+    def __init__(self, redis_host='localhost', redis_port=6379, redis_key='shared_orderQ'): 
+
         self.redis = redis.Redis(host=redis_host, port=redis_port, decode_responses=False)
-        self.redis_key = redis_key
+        self.redis_key = redis_key 
+
+        #self.redis.delete(self.redis_key)
 
         self.coffee = deque()
         self.labels = deque()
@@ -23,26 +26,29 @@ class SharedOrderQ:
         # Try loading existing state
         self.load_from_redis()
 
-    def add_order(self, order):
+    def add_order(self, order): 
+        self.load_from_redis()
         self.coffee.append(order)
         self.labels.append(order)
         self.save_to_redis()
 
-    def next_label(self):
+    def next_label(self): 
+        self.load_from_redis()
         if len(self.labels) > 0:
             self.writing = self.labels.popleft()
             self.save_to_redis()
             return self.writing
         return None
 
-    def next_coffee(self):
+    def next_coffee(self): 
+        self.load_from_redis()
         if len(self.coffee) > 0:
             self.brewing = self.coffee.popleft()
             self.save_to_redis()
             return self.brewing
         return None
 
-    def save_to_redis(self):
+    def save_to_redis(self): 
         data = pickle.dumps({
             'coffee': list(self.coffee),
             'labels': list(self.labels),

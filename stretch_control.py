@@ -9,7 +9,8 @@ BANNED_LINK_NAMES = ['link_right_wheel', 'link_left_wheel', 'caster_link', 'link
 BANNED_JOINT_NAMES = ['joint_right_wheel', 'joint_left_wheel', 'caster_joint', 'joint_gripper_finger_left', 'joint_gripper_fingertip_left', 'joint_gripper_finger_right', 'joint_gripper_fingertip_right', 'joint_head', 'joint_head_pan', 'joint_head_tilt', 'joint_aruco_right_base', 'joint_aruco_left_base', 'joint_aruco_shoulder', 'joint_aruco_top_wrist', 'joint_aruco_inner_wrist', 'camera_joint', 'camera_link_joint', 'camera_depth_joint', 'camera_depth_optical_joint', 'camera_infra1_joint', 'camera_infra1_optical_joint', 'camera_infra2_joint', 'camera_infra2_optical_joint', 'camera_color_joint', 'camera_color_optical_joint', 'camera_accel_joint', 'camera_accel_optical_joint', 'camera_gyro_joint', 'camera_gyro_optical_joint', 'joint_laser', 'joint_respeaker', 'joint_base_imu', 'joint_puller']
 
 INCHES_PER_METER = 39.37
-EE_LENGTH = 5.45 * 2 / INCHES_PER_METER
+# EE_LENGTH = 5.45 * 2 / INCHES_PER_METER
+EE_LENGTH = 0.14  # cm, dist to the maker
 clamp = lambda x, l, h : max(min(x, h), l)
 sign = lambda x : (x > 0) - (x < 0)
 
@@ -20,7 +21,7 @@ def EE_position_control_2(X, node, sleep_time=0, blocking=True, closed=True):
     # +z points upward, that means +y points in direction of base's front (INKY label)
 
     # need to restrict position to reachable workspace
-    clamp_X = (clamp(X[0], 0, 0.13 * 4 + 0.13),
+    clamp_X = (clamp(X[0], EE_LENGTH, 0.13 * 4 + 0.13),
                clamp(X[1], -0.2, EE_LENGTH),  # change negative bound because camera collision
                clamp(X[2], 0, 1.1))  # rough estimate of reachable workspace
 
