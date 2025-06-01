@@ -48,6 +48,7 @@ class BaristaNode:
             for station in self.stations[coffee.order_number]:
                 print(f'BARISTANODE: pouring from station {station} for order {coffee.order_number}')
 
+                # TODO: We probably dont need to run p1 and p2 here but I would test it first 
                 print('starting first (2) processes')
                 p1 = subprocess.Popen([sys.executable, '/home/cs225a1/coffeebot/testcoffee/send_d405_images.py'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 p2 = subprocess.Popen(['xvfb-run','-a','python3','/home/cs225a1/coffeebot/testcoffee/recv_and_yolo_d405_images.py','-c','cup'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -56,13 +57,23 @@ class BaristaNode:
                 time.sleep(2)
 
                 print('starting local process')
-                p3 = subprocess.run([sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py','-y','--station',f'{station}'], capture_output=True, text=True)
+                
+                #TODO: Test to see if thus will kill the servovectoring after the amount of stateted time
+                try:
+                    p3 = subprocess.run(
+                        [sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'],
+                        capture_output=True,
+                        text=True,
+                        timeout=20  #TODO: seconds, adjust as needed
+                    )
+                    print('p3 (visual servoing) finished')
+                    if p3.stdout:
+                        print(f'stdout: {p3.stdout}')
+                    if p3.stderr:
+                        print(f'stderr: {p3.stderr}')
+                except subprocess.TimeoutExpired:
+                    print('visual_servoing_demo.py timed out — forcing termination')
 
-                print('p3 (visual servoing) finished')
-                if p3.stdout:
-                    print(f'stdout: {p3.stdout}')
-                if p3.stderr:
-                    print(f'stderr: {p3.stderr}')
 
                 print('killing background processes')
                 p1.terminate()
@@ -73,7 +84,7 @@ class BaristaNode:
 
             print('✅ Coffee made.')
             self.state.compute_state(self.queue)
-
+    #TODO: do we need this function?
     def give_order_to_human(self):
         return
 
