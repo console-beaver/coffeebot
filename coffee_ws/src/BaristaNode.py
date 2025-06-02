@@ -75,12 +75,12 @@ class BaristaNode:
                     print('visual_servoing_demo.py timed out — forcing termination')
 
 
-                print('killing background processes')
-                p1.terminate()
-                p2.terminate()
-                time.sleep(1)
-                if p1.poll() is None: p1.kill()
-                if p2.poll() is None: p2.kill()
+                #print('killing background processes')
+                #p1.terminate()
+                #p2.terminate()
+                #time.sleep(1)
+                #if p1.poll() is None: p1.kill()
+                #if p2.poll() is None: p2.kill()
 
             print('✅ Coffee made.')
             self.state.compute_state(self.queue)
