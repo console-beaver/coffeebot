@@ -56,16 +56,26 @@ class BaristaNode:
                 #print('sleeping...')
                 #time.sleep(2)
 
+                p = subprocess.Popen([sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'], stdout=subprocess.PIPE, text=True)
+
+                for line in p.stdout:
+                    if "Sequence complete. Shutting down." in line:
+                        break
+
+                p.terminate()
+                p.wait()
+
+                '''
                 print('starting local process')
                 p1 = None
-                
+
                 #TODO: Test to see if thus will kill the servovectoring after the amount of stateted time
                 try:
                     p1 = subprocess.run(
                         [sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'],
                         capture_output=True,
                         text=True,
-                        timeout=60  #TODO: seconds, adjust as needed
+                        timeout=120  #TODO: seconds, adjust as needed
                     )
                     print('p1 (visual servoing) finished')
                     if p1.stdout:
@@ -82,6 +92,7 @@ class BaristaNode:
                 time.sleep(1)
                 if p1.poll() is None: p1.kill()
                 #if p2.poll() is None: p2.kill()
+                '''
 
             print('✅ Coffee made.')
             self.state.compute_state(self.queue)
