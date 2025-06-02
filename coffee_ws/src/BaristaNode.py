@@ -65,7 +65,7 @@ class BaristaNode:
                     stdout=subprocess.PIPE,
                     text=True
                 )
-
+                print("is it on")
                 for line in p.stdout:
                     print(line.strip())
                     if "Sequence complete. Shutting down." in line:
