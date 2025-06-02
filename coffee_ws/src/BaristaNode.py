@@ -64,6 +64,12 @@ class BaristaNode:
 
                 p.terminate()
                 p.wait()
+                try:
+                    p.wait(timeout=2)
+                except subprocess.TimeoutExpired:
+                    print("Process did not terminate, killing it.")
+                    p.kill()
+                    p.wait()
 
                 '''
                 print('starting local process')
