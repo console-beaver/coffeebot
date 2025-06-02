@@ -7,6 +7,8 @@ from utils.state_comp import barista_state
 from utils.secrets import BLINKEY_IP, INKEY_IP, BLINKEY_IP2
 from utils.sharedOrderQ import SharedOrderQ, order
 
+import psutil
+
 RATE = 1.0
 
 class BaristaNode:
@@ -56,20 +58,32 @@ class BaristaNode:
                 #print('sleeping...')
                 #time.sleep(2)
 
-                p = subprocess.Popen([sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'], stdout=subprocess.PIPE, text=True)
+                
+
+                p = subprocess.Popen(
+                    [sys.executable, "/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py", "-y", "--station", f"{station}"],
+                    stdout=subprocess.PIPE,
+                    text=True
+                )
 
                 for line in p.stdout:
+                    print(line.strip())
                     if "Sequence complete. Shutting down." in line:
                         break
 
+                print("Sending terminate()")
                 p.terminate()
-                
                 try:
                     p.wait(timeout=2)
+                    print("Process exited cleanly with return code:", p.returncode)
                 except subprocess.TimeoutExpired:
                     print("Process did not terminate, killing it.")
                     p.kill()
-                    p.wait()
+
+                if psutil.pid_exists(p.pid):
+                    print("⚠️ Process is still alive!")
+                else:
+                    print("✅ Process is confirmed dead.")
 
                 '''
                 print('starting local process')
