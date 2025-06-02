@@ -321,6 +321,7 @@ def recenter_robot(robot):
     robot.end_of_arm.get_joint('stretch_gripper').move_to(joint_state_center['gripper_pos'])
     robot.push_command()
     robot.wait_command()
+    print("hi")
         
 
 def main(use_yolo, use_remote_computer, exposure, station):
@@ -670,7 +671,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     recenter_robot(robot)
 
                     # Cleanly exit the program after celebration
-                    print("Sequence complete. Shutting down.")
+                    print("Sequence complete. Shutting down. :)")
                     controller.stop()
                     robot.stop()
                     if not use_yolo:
