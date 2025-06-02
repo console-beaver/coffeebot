@@ -596,6 +596,12 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
                 if station == 'D':
                     print("Executing Station D behavior: drop in place.")
+                    # Rotate the base back to its original orientation before recentering
+                    joint_state = controller.get_joint_state()
+                    angle_to_zero = hm.angle_diff_rad(0.0, joint_state['base_odom_theta'])
+                    robot.base.rotate_by(angle_to_zero)
+                    robot.push_command()
+                    robot.wait_command()
                     recenter_robot(robot)
                     robot.arm.move_to(0.55)
                     robot.lift.move_to(0.9)
