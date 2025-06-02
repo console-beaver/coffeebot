@@ -665,10 +665,10 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     # robot.base.rotate_by(-joint_state['base_odom_theta'])
                     robot.push_command()
                     robot.wait_command()
+                    print("0.6")
                     robot.base.translate_by(0.6)
                     robot.push_command()
                     robot.wait_command()
-                    recenter_robot(robot)
 
                     # Cleanly exit the program after celebration
                     print("Sequence complete. Shutting down. :)")
