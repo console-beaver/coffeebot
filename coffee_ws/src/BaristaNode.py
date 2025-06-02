@@ -49,12 +49,12 @@ class BaristaNode:
                 print(f'BARISTANODE: pouring from station {station} for order {coffee.order_number}')
 
                 # TODO: We probably dont need to run p1 and p2 here but I would test it first 
-                print('starting first (2) processes')
-                p1 = subprocess.Popen([sys.executable, '/home/cs225a1/coffeebot/testcoffee/send_d405_images.py'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                p2 = subprocess.Popen(['xvfb-run','-a','python3','/home/cs225a1/coffeebot/testcoffee/recv_and_yolo_d405_images.py','-c','cup'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                #print('starting first (2) processes')
+                #p1 = subprocess.Popen([sys.executable, '/home/cs225a1/coffeebot/testcoffee/send_d405_images.py'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                #p2 = subprocess.Popen(['xvfb-run','-a','python3','/home/cs225a1/coffeebot/testcoffee/recv_and_yolo_d405_images.py','-c','cup'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-                print('sleeping...')
-                time.sleep(2)
+                #print('sleeping...')
+                #time.sleep(2)
 
                 print('starting local process')
                 
@@ -64,7 +64,7 @@ class BaristaNode:
                         [sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'],
                         capture_output=True,
                         text=True,
-                        timeout=20  #TODO: seconds, adjust as needed
+                        timeout=60  #TODO: seconds, adjust as needed
                     )
                     print('p3 (visual servoing) finished')
                     if p3.stdout:
@@ -84,8 +84,6 @@ class BaristaNode:
 
             print('✅ Coffee made.')
             self.state.compute_state(self.queue)
-    #TODO: do we need this function?
-    def give_order_to_human(self):
         return
 
 if __name__ == '__main__':
