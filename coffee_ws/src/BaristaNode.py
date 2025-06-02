@@ -60,26 +60,26 @@ class BaristaNode:
                 
                 #TODO: Test to see if thus will kill the servovectoring after the amount of stateted time
                 try:
-                    p3 = subprocess.run(
+                    p1 = subprocess.run(
                         [sys.executable, '/home/cs225a1/coffeebot/testcoffee/visual_servoing_demo.py', '-y', '--station', f'{station}'],
                         capture_output=True,
                         text=True,
                         timeout=60  #TODO: seconds, adjust as needed
                     )
-                    print('p3 (visual servoing) finished')
-                    if p3.stdout:
-                        print(f'stdout: {p3.stdout}')
-                    if p3.stderr:
-                        print(f'stderr: {p3.stderr}')
+                    print('p1 (visual servoing) finished')
+                    if p1.stdout:
+                        print(f'stdout: {p1.stdout}')
+                    if p1.stderr:
+                        print(f'stderr: {p1.stderr}')
                 except subprocess.TimeoutExpired:
                     print('visual_servoing_demo.py timed out — forcing termination')
 
 
                 #print('killing background processes')
-                #p1.terminate()
+                p1.terminate()
                 #p2.terminate()
-                #time.sleep(1)
-                #if p1.poll() is None: p1.kill()
+                time.sleep(1)
+                if p1.poll() is None: p1.kill()
                 #if p2.poll() is None: p2.kill()
 
             print('✅ Coffee made.')
