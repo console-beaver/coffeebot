@@ -19,6 +19,7 @@ import loop_timer as lt
 import yolo_networking as yn
 from stretch_body import robot_params
 from stretch_body import hello_utils as hu
+import sys
 
 # Override for displaying camera images. Set to False to disable all cv2.imshow/waitKey calls (e.g., on headless systems).
 DISPLAY_CAM_OVERRIDE = False  # Disable GUI display on systems without GUI
@@ -672,6 +673,7 @@ def main(use_yolo, use_remote_computer, exposure, station):
 
                     # Cleanly exit the program after celebration
                     print("Sequence complete. Shutting down. :)")
+                    sys.stdout.flush()
                     controller.stop()
                     robot.stop()
                     if not use_yolo:
@@ -918,7 +920,7 @@ if __name__ == '__main__':
     if not dh.exposure_argument_is_valid(exposure):
         raise argparse.ArgumentTypeError(f'The provided exposure setting, {exposure}, is not a valide keyword, {dh.exposure_keywords}, or is outside of the allowed numeric range, {dh.exposure_range}.')
 
-    import sys
+    
     sys.exit(main(use_yolo, use_remote_computer, exposure, args.station))
 
     print("You should not see this — process should have exited.")
