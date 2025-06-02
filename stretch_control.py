@@ -15,7 +15,7 @@ clamp = lambda x, l, h : max(min(x, h), l)
 sign = lambda x : (x > 0) - (x < 0)
 
 # implemented from scratch, using only 3 joints (arm lift, telescoping arm extension, and wrist yaw
-def EE_position_control_2(X, node, sleep_time=0, blocking=True, closed=True):
+def EE_position_control_2(X, node, sleep_time=0, blocking=True, closed=True, force_check=False):
     # my base-frame coordinates: arm is connected to base at (0,0,0), x,y,z
     # +x points in the direction of the telescoping arm
     # +z points upward, that means +y points in direction of base's front (INKY label)
@@ -29,19 +29,24 @@ def EE_position_control_2(X, node, sleep_time=0, blocking=True, closed=True):
         if clamp_X[i] != X[i]: print('coordinate '+v+' was clamped')
         else: print('coordinate '+v+' was not clamped')
 
+    print(f'trying theta calc: abs(X[1])={abs(X[1])}')
     theta = math.asin(abs(X[1]) / EE_LENGTH)
     # print(f'calculated theta for this movement: {theta}, {theta * sign(X[1])}')
     x_offset = EE_LENGTH * math.cos(theta)
 
-    node.move_to_pose({'joint_wrist_pitch': 0.0, 'joint_wrist_roll': 0.0})
-    if closed: node.move_to_pose({'joint_gripper_finger_left': 0.0})
+    if closed: node.move_to_pose({'joint_gripper_finger_left': 0.0, 'joint_wrist_roll': 0.08, })
+    if force_check:
+        node.move_to_pose({'joint_lift': (X[2], 33.0)}, custom_contact_thresholds=True)
+        node.move_to_pose({'joint_wrist_pitch': (0.02, 2.0)}, custom_contact_thresholds=True)
+    else: 
+        node.move_to_pose({'joint_lift': X[2]})
+        node.move_to_pose({'joint_wrist_pitch': 0.02})
     node.move_to_pose({
-        'joint_lift': X[2],
         'joint_arm': X[0] - x_offset,
         'joint_wrist_yaw': theta * sign(float(X[1])),
     }, blocking=blocking)
 
-    print(f'finished movement')
+    print(f'finished movement to Z={X[2]}')
 
     time.sleep(sleep_time)
 

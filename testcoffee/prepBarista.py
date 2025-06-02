@@ -16,6 +16,12 @@ if __name__ == '__main__':
     robot.push_command()
     robot.wait_command()
     robot.end_of_arm.get_joint('wrist_yaw').move_to(0)
-    robot.end_of_arm.get_joint('wrist_pitch').move_to(0)
+    robot.end_of_arm.get_joint('wrist_pitch').move_to(0.02)
+    robot.end_of_arm.get_joint('wrist_roll').move_to(0.08)
     robot.push_command()
     robot.wait_command()
+
+
+    
+
+

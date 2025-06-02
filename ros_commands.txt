@@ -1,7 +1,46 @@
 # Good practice to do fisrt at start:  
-to home: home 
+to home: home  
+
+# To run Waiter on Blinkey: 
+
+Notes: there are aliases unique to blinkey   
+
+1. ssh into Blinkey, then log into cs225a1 on the cart monitor
+
+2. Run: run_blinkey  
+- make sure to wait for microphone array to be initilaizzed and in the 
+cart monitor change the auudio input to the headphone option
+
+3. In new terminal run: python3 WaiterNode 
+- do so from the coffeebot/coffee_ws/src   
+
+4. TODO: add steps to prep teh label making 
+
+# To run the Barista to Inkey: 
+
+1. ssh into Inkey  
+
+TODO decide if step 2 is needed 
+2. 3. Run in seperate terminals: 
+
+-2.1: /home/cs225a1/coffeebot/testcoffee/send_d405_images.py
+
+-2.2: xvfb-run -a python3 /home/cs225a1/coffeebot/testcoffee/recv_and_yolo_d405_images.py -c cup
+
+2. Wait for step 2 on Waiter to be done  
+
+3. In new terminal run: python3 BaristaNode 
+- do so from the coffeebot/coffee_ws/src   
+
+ 
 
 
+
+
+
+
+
+#  ================================Old Running Waiter ====================================
 # To Run the waiter:  
 
 1. Turn on the redis server (both robots need to make and publish q so this should always be done first)  
@@ -24,7 +63,7 @@ ros2 launch stretch_core stretch_driver.launch.py
 
 ros2 launch respeaker_ros2 respeaker.launch.py  
 
-3. Run the nod e 
+3. Run the node 
 python3 WaiterNode 
 
 Notes: run 1 - 2 from home dir, run WaiterNode from 
