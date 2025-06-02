@@ -18,10 +18,10 @@ class BaristaNode:
         self.queue = SharedOrderQ(redis_host=BLINKEY_IP2, redis_port=6400)
 
         self.stations = {
-            1: 'ABD',
-            2: 'BCD',
-            3: 'AAD',
-            4: "CD"
+            1: 'AACD',
+            2: 'CBD',
+            3: 'ABCD',
+            4: "CCD"
         }
 
     def main(self):
