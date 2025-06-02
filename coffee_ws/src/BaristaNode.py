@@ -63,7 +63,7 @@ class BaristaNode:
                         break
 
                 p.terminate()
-                p.wait()
+                
                 try:
                     p.wait(timeout=2)
                 except subprocess.TimeoutExpired:
