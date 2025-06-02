@@ -69,6 +69,8 @@ class BaristaNode:
                 for line in p.stdout:
                     print(line.strip())
                     if "Sequence complete. Shutting down." in line:
+                        time.sleep(2)
+                        print("found it")
                         break
 
                 print("Sending terminate()")
