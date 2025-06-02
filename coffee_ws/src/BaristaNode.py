@@ -57,6 +57,7 @@ class BaristaNode:
                 #time.sleep(2)
 
                 print('starting local process')
+                p1 = None
                 
                 #TODO: Test to see if thus will kill the servovectoring after the amount of stateted time
                 try:
