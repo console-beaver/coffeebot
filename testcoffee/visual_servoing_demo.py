@@ -607,6 +607,10 @@ def main(use_yolo, use_remote_computer, exposure, station):
                     robot.wait_command()
                     recenter_robot(robot)
                     print("Station D sequence complete. Shutting down.")
+
+                    # Cleanly exit the program after celebration
+                    print("Sequence complete. Shutting down. :)")
+                    sys.stdout.flush()
                     controller.stop()
                     robot.stop()
                     if not use_yolo:
